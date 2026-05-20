@@ -4,7 +4,7 @@
 
 <BentoCard
   title="From the blog"
-  class="col-span-4 row-span-5"
+  class="col-span-3 row-span-4"
   largeX={-200}
   largeDuration={750}
   largeDelay={600}

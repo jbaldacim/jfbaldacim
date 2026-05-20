@@ -11,7 +11,7 @@
   class="flex items-center justify-center max-w-7xl w-full mx-auto md:h-screen p-4 md:overflow-hidden"
 >
   <section
-    class="md:grid md:grid-cols-12 md:grid-rows-10 gap-3 p-6 rounded-xl md:h-full bg-background/50 flex flex-col"
+    class="md:grid md:grid-cols-9 md:grid-rows-8 gap-3 p-6 rounded-xl md:h-full bg-background/50 flex flex-col"
   >
     <Menu />
 
