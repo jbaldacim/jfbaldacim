@@ -9,11 +9,11 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(95.514% 0.00011 271.152);
 
   --foreground: oklch(0.148 0.004 228.8);
 
-  --card: oklch(1 0 0);
+  --card: oklch(97.913% 0.00011 271.152);
 
   --card-foreground: oklch(0.148 0.004 228.8);
 
