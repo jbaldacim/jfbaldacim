@@ -1,5 +1,6 @@
 <!-- BLOG PROJECTS - Talk about how I changed params for this component to enable transitions -->
 <!-- TODO -  Explore card colors -->
+<!-- TODO - Explore the possibility of using springs for transitions -->
 <script lang="ts">
   import type { HTMLAttributes } from "svelte/elements";
   import { cn, type WithElementRef } from "$lib/utils.js";
@@ -24,7 +25,7 @@
       regArgs: FlyParams;
       small: typeof fly;
       smallArgs: FlyParams;
-    }
+    },
   ): TransitionConfig {
     if (innerWidth > 640) {
       return options.reg(node, options.regArgs);
@@ -71,7 +72,7 @@
     data-size={size}
     class={cn(
       "ring-foreground/10 bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-6 text-sm ring-1 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col",
-      className
+      className,
     )}
     in:transition={{
       reg: fly,

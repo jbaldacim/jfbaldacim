@@ -5,7 +5,7 @@
 </script>
 
 <BentoCard
-  title="Stack"
+  title="Currently"
   class={className}
   largeX={200}
   largeDuration={750}
@@ -15,9 +15,7 @@
   smallDelay={600}
 >
   <p>
-    While building for the web, I am familiar with TypeScript, React & Next.js,
-    Svelte & SvelteKit, Vite and Tailwind. For data visualization, I work
-    primarily with D3, and any other data task is done with Python and its data
-    ecosystem.
+    Systems Analysis and Development undergraduate student at IFSP — Campus
+    Boituva
   </p>
 </BentoCard>

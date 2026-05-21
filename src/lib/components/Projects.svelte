@@ -1,10 +1,12 @@
 <script>
   import BentoCard from "./BentoCard.svelte";
+
+  let { class: className = "" } = $props();
 </script>
 
 <BentoCard
   title="Projects"
-  class="col-span-3 row-span-7"
+  class={className}
   largeX={200}
   largeDuration={750}
   largeDelay={850}

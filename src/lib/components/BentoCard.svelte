@@ -36,7 +36,10 @@
 </script>
 
 <Card.Root
-  class={cn("overflow-hidden", className)}
+  class={cn(
+    "overflow-hidden hover:ring-accent transition-all duration-300 group",
+    className,
+  )}
   {largeX}
   {largeY}
   {largeDuration}
@@ -48,7 +51,10 @@
 >
   {#if title}
     <Card.Header>
-      <Card.Title class="text-xl uppercase text-semibold">{title}</Card.Title>
+      <Card.Title
+        class="text-lg uppercase text-semibold tracking-wider group-hover:text-primary transition-colors duration-300"
+        >{title}</Card.Title
+      >
     </Card.Header>
   {/if}
   <Card.Content class="text-md">

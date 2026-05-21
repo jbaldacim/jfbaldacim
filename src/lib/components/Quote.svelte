@@ -4,7 +4,7 @@
 </script>
 
 <BentoCard
-  class="col-span-full row-span-1"
+  class="col-span-3 row-span-1 flex items-center justify-center"
   largeY={200}
   largeDuration={750}
   largeDelay={750}
