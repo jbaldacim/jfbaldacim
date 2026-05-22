@@ -1,12 +1,15 @@
 <script>
+  import { cn } from "$lib/utils";
   import BentoCard from "./BentoCard.svelte";
+
+  let { class: className = "" } = $props();
 </script>
 
 <BentoCard
-  class="col-span-1 row-span-1 flex items-center justify-center"
+  class={cn("flex items-center justify-center text-center", className)}
   largeY={200}
   largeDuration={750}
   largeDelay={750}
 >
-  <p>&copy; {new Date().getFullYear()} João Baldacim.</p>
+  <p>&copy; {new Date().getFullYear()} ...</p>
 </BentoCard>

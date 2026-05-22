@@ -16,6 +16,6 @@
 >
   <p>
     Systems Analysis and Development undergraduate student at IFSP — Campus
-    Boituva
+    Boituva.
   </p>
 </BentoCard>

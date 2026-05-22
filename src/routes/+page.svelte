@@ -9,26 +9,30 @@
   import Stack from "$lib/components/Stack.svelte";
 </script>
 
-<main
-  class="flex items-center justify-center max-w-7xl w-full mx-auto md:h-screen p-4 md:overflow-hidden"
+<div
+  class="bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px]"
 >
-  <section
-    class="md:grid md:grid-cols-4 md:grid-rows-[auto_repeat(4,1fr)_auto] gap-3 p-6 rounded-xl md:h-full bg-background/50 flex flex-col lg:max-h-200"
+  <main
+    class="flex items-center justify-center max-w-7xl w-full mx-auto md:h-screen p-4 md:overflow-hidden"
   >
-    <Menu />
+    <section
+      class="md:grid md:grid-cols-6 md:grid-rows-[auto_repeat(4,1fr)_auto] gap-3 p-6 rounded-xl md:h-full flex flex-col lg:max-h-200"
+    >
+      <Menu />
 
-    <About class="col-span-1 row-span-2" />
+      <About class="col-span-2 row-span-2" />
 
-    <Stack class="col-span-1 row-span-2" />
+      <Stack class="col-span-2 row-span-2" />
 
-    <FromTheBlog class="col-span-2 row-span-4" />
+      <FromTheBlog class="col-span-2 row-span-4" />
 
-    <Currently class="col-span-2 row-span-1" />
+      <Currently class="col-span-3 row-span-1" />
 
-    <Projects class="col-span-2 row-span-1" />
+      <Projects class="col-span-3 row-span-1" />
 
-    <Quote />
+      <Quote class="col-span-4 row-span-1" />
 
-    <Copyright />
-  </section>
-</main>
+      <Copyright class="col-span-2 row-span-1" />
+    </section>
+  </main>
+</div>

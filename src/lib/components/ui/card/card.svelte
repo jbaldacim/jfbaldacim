@@ -1,6 +1,4 @@
-<!-- BLOG PROJECTS - Talk about how I changed params for this component to enable transitions -->
-<!-- TODO -  Explore card colors -->
-<!-- TODO - Explore the possibility of using springs for transitions -->
+<!-- TODO - Remove this and shadcn-svelte -->
 <script lang="ts">
   import type { HTMLAttributes } from "svelte/elements";
   import { cn, type WithElementRef } from "$lib/utils.js";

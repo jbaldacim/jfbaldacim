@@ -17,9 +17,11 @@
   >
     <div>
       <span
-        class="tracking-widest font-bold uppercase group-hover:text-primary transition-colors duration-300"
-        >João Fleury Baldacim</span
+        class="tracking-wide font-bold uppercase group-hover:text-primary transition-colors duration-300"
       >
+        <!-- João Fleury Baldacim -->
+        ...
+      </span>
     </div>
     <div
       class="flex flex-row gap-2 items-center [&>a]:hover:text-primary tracking-wider transition-colors duration-300"

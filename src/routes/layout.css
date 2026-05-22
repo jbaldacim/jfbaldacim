@@ -72,10 +72,16 @@
   --sidebar-border: oklch(0.925 0.005 214.3);
 
   --sidebar-ring: oklch(0.723 0.014 214.4);
+
+  --dot-color: color-mix(
+    in srgb,
+    var(--color-muted-foreground) 18%,
+    transparent
+  );
 }
 
 .dark {
-  --background: oklch(0.148 0.004 228.8);
+  --background: oklch(18.389% 0.00518 219.937);
 
   --foreground: oklch(0.987 0.002 197.1);
 

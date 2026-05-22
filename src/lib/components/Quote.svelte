@@ -1,10 +1,13 @@
 <!-- TODO - fix uncentered text, it might have to do with leading -->
 <script>
+  import { cn } from "$lib/utils";
   import BentoCard from "./BentoCard.svelte";
+
+  let { class: className = "" } = $props();
 </script>
 
 <BentoCard
-  class="col-span-3 row-span-1 flex items-center justify-center"
+  class={cn("flex items-center justify-center", className)}
   largeY={200}
   largeDuration={750}
   largeDelay={750}
