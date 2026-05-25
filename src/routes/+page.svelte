@@ -26,9 +26,9 @@
 
       <FromTheBlog class="col-span-2 row-span-4" />
 
-      <Currently class="col-span-3 row-span-1" />
+      <Projects class="col-span-1 row-span-1" href="/projects" />
 
-      <Projects class="col-span-3 row-span-1" />
+      <Currently class="col-span-4 row-span-1" />
 
       <Quote class="col-span-4 row-span-1" />
 

@@ -1,7 +1,7 @@
 <script>
   import BentoCard from "./BentoCard.svelte";
 
-  let { class: className = "" } = $props();
+  let { class: className = "", href = null } = $props();
 </script>
 
 <BentoCard
@@ -10,6 +10,5 @@
   largeX={200}
   largeDuration={750}
   largeDelay={850}
->
-  <p>Projects go here</p>
-</BentoCard>
+  {href}
+></BentoCard>
