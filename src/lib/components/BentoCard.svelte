@@ -80,8 +80,11 @@
       bind:this={ref}
       href={resolve(href)}
       class={cn(
-        "flex flex-row h-full w-full items-center justify-between gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg uppercase text-semibold hover:text-primary tracking-tight font-heading font-medium group",
+        "flex h-full w-full gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg",
         className,
+        children
+          ? "flex-col justify-start items-start"
+          : "flex-row justify-center items-center",
       )}
       in:transition|global={{
         reg: fly,
@@ -100,49 +103,58 @@
         },
       }}
     >
-      <h2>{title}</h2>
-      <div class="relative flex size-16 items-center justify-center">
-        <!-- <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      <div
+        class="flex flex-row items-center justify-between w-full group-hover:text-primary tracking-tight font-heading font-medium uppercase text-semibold pr-10"
+      >
+        <h2>{title}</h2>
+        <div class="relative flex items-center justify-center">
+          <!-- <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
         >
-          <path d="M7 7h10v10" />
-          <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+        <path d="M7 17 17 7" />
         </svg> -->
 
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="absolute"
-        >
-          <path
-            d="M7 7h10v10"
-            class={cn(
-              "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20]",
-            )}
-          />
-          <path
-            d="M7 17 17 7"
-            class={cn(
-              "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15]",
-            )}
-          />
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="absolute"
+          >
+            <path
+              d="M7 7h10v10"
+              class={cn(
+                "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20]",
+              )}
+            />
+            <path
+              d="M7 17 17 7"
+              class={cn(
+                "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15]",
+              )}
+            />
+          </svg>
+        </div>
       </div>
+      {#if children}
+        <div class="text-sm leading-6 font-light">
+          {@render children?.()}
+        </div>
+      {/if}
     </a>
   {:else}
     <div

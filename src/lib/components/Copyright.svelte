@@ -11,5 +11,5 @@
   largeDuration={750}
   largeDelay={750}
 >
-  <p>&copy; {new Date().getFullYear()} ...</p>
+  <p>&copy; {new Date().getFullYear()} João Fleury Baldacim</p>
 </BentoCard>

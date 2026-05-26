@@ -19,8 +19,7 @@
       <span
         class="tracking-wide font-bold uppercase group-hover:text-primary transition-colors duration-300"
       >
-        <!-- João Fleury Baldacim -->
-        ...
+        João Fleury Baldacim
       </span>
     </div>
     <div
