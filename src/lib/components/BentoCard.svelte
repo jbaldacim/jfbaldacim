@@ -102,7 +102,7 @@
     >
       <h2>{title}</h2>
       <div class="relative flex size-16 items-center justify-center">
-        <svg
+        <!-- <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -115,7 +115,7 @@
         >
           <path d="M7 7h10v10" />
           <path d="M7 17 17 7" />
-        </svg>
+        </svg> -->
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
