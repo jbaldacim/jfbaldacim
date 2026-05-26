@@ -10,29 +10,31 @@
 </script>
 
 <div
-  class="bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px]"
+  class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px]"
 >
   <main
     class="flex items-center justify-center max-w-7xl w-full mx-auto md:h-screen p-4 md:overflow-hidden"
   >
     <section
-      class="md:grid md:grid-cols-6 md:grid-rows-[auto_repeat(4,1fr)_auto] gap-3 p-6 rounded-xl md:h-full flex flex-col lg:max-h-200"
+      class="md:grid md:grid-cols-12 md:grid-rows-[auto_repeat(10,1fr)_auto] gap-3 p-6 rounded-xl md:h-full flex flex-col"
     >
       <Menu />
 
-      <About class="col-span-2 row-span-2" />
+      <About class="col-span-5 row-span-5" />
 
-      <Stack class="col-span-2 row-span-2" />
+      <Stack class="col-span-4 row-span-5" />
 
-      <FromTheBlog class="col-span-2 row-span-4" />
+      <FromTheBlog class="col-span-3 row-span-10" />
 
-      <Projects class="col-span-1 row-span-1" href="/projects" />
+      <Projects class="col-span-3 row-span-1" href="/projects" />
+      <Projects class="col-span-3 row-span-1" href="/projects" />
+      <Projects class="col-span-3 row-span-1" href="/projects" />
 
-      <Currently class="col-span-4 row-span-1" />
+      <Currently class="col-span-8 row-span-4" />
 
-      <Quote class="col-span-4 row-span-1" />
+      <Quote class="col-span-9 row-span-1" />
 
-      <Copyright class="col-span-2 row-span-1" />
+      <Copyright class="col-span-3 row-span-1" />
     </section>
   </main>
 </div>

@@ -16,7 +16,6 @@
   import type { HTMLAttributes } from "svelte/elements";
   import type { RouteId } from "$app/types";
   import { resolve } from "$app/paths";
-  import { ArrowUpRight } from "@lucide/svelte";
 
   let mounted = $state(false);
   let innerWidth = $state(0);
@@ -102,7 +101,48 @@
       }}
     >
       <h2>{title}</h2>
-      <ArrowUpRight class="size-5" />
+      <div class="relative flex size-16 items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M7 7h10v10" />
+          <path d="M7 17 17 7" />
+        </svg>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="absolute"
+        >
+          <path
+            d="M7 7h10v10"
+            class={cn(
+              "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20]",
+            )}
+          />
+          <path
+            d="M7 17 17 7"
+            class={cn(
+              "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15]",
+            )}
+          />
+        </svg>
+      </div>
     </a>
   {:else}
     <div
@@ -135,7 +175,7 @@
           <h2>{title}</h2>
         </div>
       {/if}
-      <div class="text-sm leading-6">
+      <div class="text-sm leading-6 font-light">
         {@render children?.()}
       </div>
     </div>
