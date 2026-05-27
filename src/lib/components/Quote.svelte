@@ -1,5 +1,5 @@
 <!-- TODO - fix uncentered text, it might have to do with leading -->
-<script>
+<script lang="ts">
   import { cn } from "$lib/utils";
   import BentoCard from "./BentoCard.svelte";
 

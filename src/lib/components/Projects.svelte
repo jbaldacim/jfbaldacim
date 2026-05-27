@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import BentoCard from "./BentoCard.svelte";
 
   let { class: className = "", href = null } = $props();

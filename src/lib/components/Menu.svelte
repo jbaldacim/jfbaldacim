@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { resolve } from "$app/paths";
   import { fly } from "svelte/transition";
   import ModeToggle from "./ModeToggle.svelte";
