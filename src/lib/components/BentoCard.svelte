@@ -80,7 +80,7 @@
       bind:this={ref}
       href={resolve(href)}
       class={cn(
-        "flex h-full w-full gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg",
+        "flex h-full w-full gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
         className,
         children
           ? "flex-col justify-start items-start"
@@ -104,7 +104,7 @@
       }}
     >
       <div
-        class="flex flex-row items-center justify-between w-full group-hover:text-primary tracking-tight font-heading font-medium uppercase text-semibold pr-10"
+        class="flex flex-row items-center justify-between w-full group-hover:text-primary group-focus-visible:text-primary tracking-tight font-heading font-medium uppercase text-semibold pr-10"
       >
         <h2>{title}</h2>
         <div class="relative flex items-center justify-center">
@@ -138,13 +138,13 @@
             <path
               d="M7 7h10v10"
               class={cn(
-                "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20]",
+                "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20] group-focus-visible:[stroke-dasharray:20] group-focus-visible:[stroke-dashoffset:0]",
               )}
             />
             <path
               d="M7 17 17 7"
               class={cn(
-                "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15]",
+                "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15] group-focus-visible:[stroke-dasharray:15] group-focus-visible:[stroke-dashoffset:0]",
               )}
             />
           </svg>
