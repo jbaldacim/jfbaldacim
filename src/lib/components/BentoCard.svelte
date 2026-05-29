@@ -187,7 +187,7 @@
           <h2>{title}</h2>
         </div>
       {/if}
-      <div class="text-sm leading-6 font-light">
+      <div class="text-sm leading-6 font-light flex w-full flex-col">
         {@render children?.()}
       </div>
     </div>

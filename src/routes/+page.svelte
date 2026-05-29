@@ -20,25 +20,24 @@
     class="flex items-center justify-center max-w-7xl w-full mx-auto md:h-screen p-4 md:overflow-hidden"
   >
     <section
-      class="md:grid md:grid-cols-12 md:grid-rows-[auto_repeat(4,1fr)_auto] gap-3 p-6 rounded-xl md:h-full flex flex-col lg:max-h-200"
+      class="md:grid md:grid-cols-12 md:grid-rows-[auto_repeat(4,1fr)_auto] gap-3 p-6 rounded-xl md:h-full flex flex-col lg:max-h-215"
     >
       <Menu />
 
-      <About class="col-span-5 row-span-2" />
+      <About class="col-span-6 row-span-2" />
 
-      <Stack class="col-span-4 row-span-2" />
-
-      <Blog class="col-span-3 row-span-1" href="/blog" />
-
-      <FromTheBlog class="col-span-3 row-span-3" />
       <Projects class="col-span-3 row-span-1" href="/projects" />
-      <Contact class="col-span-3 row-span-1" href="/contact" />
+      <Stack class="col-span-3 row-span-2" />
       <FeaturedProject
         class="col-span-3 row-span-1"
         href="/projects/pisa-2022"
       />
+      <Blog class="col-span-3 row-span-2" href="/blog" />
 
-      <Currently class="col-span-6 row-span-1" />
+      <FromTheBlog class="col-span-3 row-span-2" />
+      <Contact class="col-span-3 row-span-1" href="/contact" />
+
+      <!-- <Currently class="col-span-6 row-span-1" /> -->
 
       <OpenTo class="col-span-3 row-span-1" />
 
