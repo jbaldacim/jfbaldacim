@@ -1,8 +1,66 @@
 <script lang="ts" module>
   export type PixelMatrix = number[][];
+
+  // Singleton 1x1 canvas to natively parse ANY color format (oklch, hsl, p3) into RGB.
+  let colorParserCtx: CanvasRenderingContext2D | null = null;
+
+  function getRgbFromCss(cssColor: string) {
+    if (typeof document === "undefined") return { r: 0, g: 0, b: 0 };
+    if (!colorParserCtx) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1;
+      canvas.height = 1;
+      colorParserCtx = canvas.getContext("2d", { willReadFrequently: true });
+    }
+
+    if (!colorParserCtx) return { r: 0, g: 0, b: 0 };
+
+    colorParserCtx.clearRect(0, 0, 1, 1);
+    colorParserCtx.fillStyle = cssColor;
+    colorParserCtx.fillRect(0, 0, 1, 1);
+    const data = colorParserCtx.getImageData(0, 0, 1, 1).data;
+
+    return { r: data[0], g: data[1], b: data[2] };
+  }
+
+  // Parses Hex strings into RGBA to support opacity interpolation
+  function parseColorToRgba(css: string | undefined) {
+    if (!css || css === "transparent" || css === "currentColor") return null;
+    const h = css.replace("#", "");
+    if (h.length === 3)
+      return {
+        r: parseInt(h[0] + h[0], 16),
+        g: parseInt(h[1] + h[1], 16),
+        b: parseInt(h[2] + h[2], 16),
+        a: 1,
+      };
+    if (h.length === 4)
+      return {
+        r: parseInt(h[0] + h[0], 16),
+        g: parseInt(h[1] + h[1], 16),
+        b: parseInt(h[2] + h[2], 16),
+        a: parseInt(h[3] + h[3], 16) / 255,
+      };
+    if (h.length === 6)
+      return {
+        r: parseInt(h.slice(0, 2), 16),
+        g: parseInt(h.slice(2, 4), 16),
+        b: parseInt(h.slice(4, 6), 16),
+        a: 1,
+      };
+    if (h.length === 8)
+      return {
+        r: parseInt(h.slice(0, 2), 16),
+        g: parseInt(h.slice(2, 4), 16),
+        b: parseInt(h.slice(4, 6), 16),
+        a: parseInt(h.slice(6, 8), 16) / 255,
+      };
+    return null;
+  }
 </script>
 
 <script lang="ts">
+  import { cn } from "$lib/utils";
   import { onMount } from "svelte";
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -12,8 +70,10 @@
     matrix: PixelMatrix;
     width?: number | string;
     height?: number | string;
+    /** Brand colors for HOVER state. Maps sequentially to matrix values 1, 2... */
     colors?: string[];
-    hoverColor?: string | null;
+    /** Rest colors for IDLE state. If omitted, defaults to "currentColor" */
+    idleColors?: string[];
     repelRadius?: number;
     strength?: number;
     returnSpeed?: number;
@@ -23,14 +83,15 @@
     resolution?: number;
     class?: string;
     style?: string;
+    title?: string;
   }
 
   let {
     matrix,
-    width = 64,
-    height = 64,
-    colors = ["#3f3f3f", "#f3f3f3"],
-    hoverColor = "#c91a1a",
+    width = 48,
+    height = 48,
+    colors = ["#000000"],
+    idleColors = [], // Fallback applied in loop
     repelRadius = 18,
     strength = 5,
     returnSpeed = 0.08,
@@ -40,19 +101,22 @@
     resolution = 1,
     class: className = "",
     style = "",
+    title = "",
   }: Props = $props();
 
   // ─────────────────────────────────────────────────────────────────────────────
   // INTERNAL STATE
   // ─────────────────────────────────────────────────────────────────────────────
-
-  // FIX 1: DOM Bindings must be $state in Svelte 5
   let containerEl: HTMLDivElement | undefined = $state();
   let canvasEl: HTMLCanvasElement | undefined = $state();
   let svgEl: SVGSVGElement | undefined = $state();
 
   let containerWidth = $state(0);
   let containerHeight = $state(0);
+
+  let baseColorStr = $state("currentColor");
+  let baseColorRGB = $state({ r: 0, g: 0, b: 0 });
+  let isReady = $state(false);
 
   const STRIDE = 8;
   let mouseX = -9999;
@@ -85,27 +149,6 @@
         : "svg",
   );
 
-  const parseHex = (hex: string | null | undefined) => {
-    if (!hex) return null;
-    const h = hex.replace("#", "");
-    if (h.length === 3) {
-      return {
-        r: parseInt(h[0] + h[0], 16),
-        g: parseInt(h[1] + h[1], 16),
-        b: parseInt(h[2] + h[2], 16),
-      };
-    }
-    return {
-      r: parseInt(h.slice(0, 2), 16),
-      g: parseInt(h.slice(2, 4), 16),
-      b: parseInt(h.slice(4, 6), 16),
-    };
-  };
-
-  let parsedColors = $derived(colors.map(parseHex));
-  let parsedHover = $derived(parseHex(hoverColor));
-
-  // FIX 2: Compute Layout purely via $derived.by instead of mutating state in an $effect
   let layoutData = $derived.by(() => {
     if (!matrix.length || containerWidth === 0 || containerHeight === 0) {
       return { particlesArr: new Float32Array(0), count: 0 };
@@ -141,14 +184,14 @@
               offsetY + yi * cellSize + sy * subCellSize + subCellSize / 2;
 
             const base = idx * STRIDE;
-            pArray[base + 0] = x; // x
-            pArray[base + 1] = y; // y
-            pArray[base + 2] = x; // homeX
-            pArray[base + 3] = y; // homeY
-            pArray[base + 4] = 0; // vx
-            pArray[base + 5] = 0; // vy
-            pArray[base + 6] = radius; // radius
-            pArray[base + 7] = pixel; // colorIndex
+            pArray[base + 0] = x;
+            pArray[base + 1] = y;
+            pArray[base + 2] = x;
+            pArray[base + 3] = y;
+            pArray[base + 4] = 0;
+            pArray[base + 5] = 0;
+            pArray[base + 6] = radius;
+            pArray[base + 7] = pixel;
             idx++;
           }
         }
@@ -158,7 +201,6 @@
     return { particlesArr: pArray, count: circleCount };
   });
 
-  // Tap into the derived layout data
   let particles = $derived(layoutData.particlesArr);
   let numParticles = $derived(layoutData.count);
 
@@ -166,7 +208,17 @@
   // EFFECTS & LIFECYCLE
   // ─────────────────────────────────────────────────────────────────────────────
 
-  // Safely scale canvas (Now triggers correctly because canvasEl is $state)
+  function updateComputedColor() {
+    if (!containerEl) return;
+    const compColor = window.getComputedStyle(containerEl).color;
+
+    if (compColor !== baseColorStr) {
+      baseColorStr = compColor;
+      baseColorRGB = getRgbFromCss(compColor);
+      isReady = true;
+    }
+  }
+
   $effect(() => {
     if (
       actualMode === "canvas" &&
@@ -188,14 +240,27 @@
         const rect = containerEl.getBoundingClientRect();
         containerWidth = rect.width;
         containerHeight = rect.height;
+        updateComputedColor();
       }
     });
-
     if (containerEl) ro.observe(containerEl);
+
+    const themeObserver = new MutationObserver(() => updateComputedColor());
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme"],
+    });
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = () => updateComputedColor();
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+
     rafId = requestAnimationFrame(tick);
 
     return () => {
       ro.disconnect();
+      themeObserver.disconnect();
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
       cancelAnimationFrame(rafId);
     };
   });
@@ -204,23 +269,13 @@
   // ANIMATION LOOP
   // ─────────────────────────────────────────────────────────────────────────────
   function tick() {
-    if (numParticles === 0) {
+    if (numParticles === 0 || !isReady) {
       rafId = requestAnimationFrame(tick);
       return;
     }
 
     const targetProgress = mouseInside ? 1 : 0;
     progress += (targetProgress - progress) * 0.25;
-
-    const currentColors = parsedColors.map((base, i) => {
-      if (!base) return "#000";
-      if (!parsedHover || progress < 0.01)
-        return colors[i] || colors[1] || "#000";
-      const r = Math.round(base.r + (parsedHover.r - base.r) * progress);
-      const g = Math.round(base.g + (parsedHover.g - base.g) * progress);
-      const b = Math.round(base.b + (parsedHover.b - base.b) * progress);
-      return `rgb(${r},${g},${b})`;
-    });
 
     let ctx: CanvasRenderingContext2D | null = null;
     if (actualMode === "canvas" && canvasEl) {
@@ -236,8 +291,61 @@
 
     const repelRadiusSq = repelRadius * repelRadius;
 
-    // Mutating a typed array via reference bypasses Svelte's render engine entirely,
-    // keeping our 60fps loop highly optimized.
+    // Advanced RGBA Interpolation Engine
+    const currentColors = colors.map((hoverStr, i) => {
+      const idleStr = idleColors[i] || "currentColor";
+
+      // Return pure CSS strings at the extremes for absolute performance and theme-syncing
+      if (progress < 0.01) {
+        if (idleStr === "transparent") return "transparent";
+        if (idleStr === "currentColor") return baseColorStr;
+        return idleStr;
+      }
+      if (progress > 0.99) return hoverStr;
+
+      // Extract Target (Hover) RGBA
+      let tR = 0,
+        tG = 0,
+        tB = 0,
+        tA = 1;
+      const tParsed = parseColorToRgba(hoverStr);
+      if (tParsed) {
+        tR = tParsed.r;
+        tG = tParsed.g;
+        tB = tParsed.b;
+        tA = tParsed.a;
+      }
+
+      // Extract Start (Idle) RGBA
+      let sR = baseColorRGB.r,
+        sG = baseColorRGB.g,
+        sB = baseColorRGB.b,
+        sA = 1;
+      if (idleStr === "transparent") {
+        // Crucial trick: Steal the target's RGB to prevent fading through muddy gray/black
+        sR = tR;
+        sG = tG;
+        sB = tB;
+        sA = 0;
+      } else if (idleStr !== "currentColor") {
+        const sParsed = parseColorToRgba(idleStr);
+        if (sParsed) {
+          sR = sParsed.r;
+          sG = sParsed.g;
+          sB = sParsed.b;
+          sA = sParsed.a;
+        }
+      }
+
+      // Mathematical Lerp
+      const r = Math.round(sR + (tR - sR) * progress);
+      const g = Math.round(sG + (tG - sG) * progress);
+      const b = Math.round(sB + (tB - sB) * progress);
+      const a = sA + (tA - sA) * progress;
+
+      return `rgba(${r},${g},${b},${a.toFixed(3)})`;
+    });
+
     for (let i = 0; i < numParticles; i++) {
       const pIdx = i * STRIDE;
       let x = particles[pIdx + 0];
@@ -274,7 +382,7 @@
       particles[pIdx + 4] = vx;
       particles[pIdx + 5] = vy;
 
-      const fillColor = currentColors[colorIdx] || currentColors[1] || "#000";
+      const fillColor = currentColors[colorIdx - 1] || baseColorStr;
 
       if (actualMode === "canvas" && ctx) {
         ctx.beginPath();
@@ -286,7 +394,7 @@
         if (el) {
           el.setAttribute("cx", String(x));
           el.setAttribute("cy", String(y));
-          if (parsedHover && progress > 0.01) {
+          if (el.getAttribute("fill") !== fillColor) {
             el.setAttribute("fill", fillColor);
           }
         }
@@ -300,7 +408,10 @@
   // EVENT HANDLERS
   // ─────────────────────────────────────────────────────────────────────────────
   function onPointerMove(e: PointerEvent) {
-    if (!containerEl) return;
+    if (!containerEl || !isReady) return;
+
+    updateComputedColor();
+
     const rect = containerEl.getBoundingClientRect();
     mouseX = e.clientX - rect.left;
     mouseY = e.clientY - rect.top;
@@ -312,39 +423,42 @@
   }
 </script>
 
-<div
-  bind:this={containerEl}
-  class={className}
-  style:width={typeof width === "number" ? `${width}px` : width}
-  style:height={typeof height === "number" ? `${height}px` : height}
-  style:position="relative"
-  style:overflow="hidden"
-  style:touch-action="none"
-  {style}
-  onpointermove={onPointerMove}
-  onpointerleave={onPointerLeave}
-  role="img"
->
-  {#if actualMode === "canvas"}
-    <canvas
-      bind:this={canvasEl}
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-    ></canvas>
-  {:else}
-    <svg
-      bind:this={svgEl}
-      viewBox="0 0 {containerWidth || 100} {containerHeight || 100}"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      {#each Array.from({ length: numParticles }) as _, i (i)}
-        <circle
-          cx={particles[i * STRIDE + 0]}
-          cy={particles[i * STRIDE + 1]}
-          r={particles[i * STRIDE + 6]}
-          fill={colors[particles[i * STRIDE + 7]] || colors[1] || "#000"}
-        />
-      {/each}
-    </svg>
+<div class={cn("flex flex-col items-center gap-2", className)} {style}>
+  <div
+    bind:this={containerEl}
+    class="relative overflow-hidden touch-none"
+    style:width={typeof width === "number" ? `${width}px` : width}
+    style:height={typeof height === "number" ? `${height}px` : height}
+    onpointermove={onPointerMove}
+    onpointerleave={onPointerLeave}
+    role="img"
+    aria-label={title || "Interactive grid icon"}
+  >
+    {#if actualMode === "canvas"}
+      <canvas bind:this={canvasEl} class="absolute inset-0 h-full w-full"
+      ></canvas>
+    {:else}
+      <svg
+        bind:this={svgEl}
+        viewBox="0 0 {containerWidth || 100} {containerHeight || 100}"
+        class="absolute inset-0 h-full w-full"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {#each Array.from({ length: numParticles }) as _, i (i)}
+          <circle
+            cx={particles[i * STRIDE + 0]}
+            cy={particles[i * STRIDE + 1]}
+            r={particles[i * STRIDE + 6]}
+            fill="currentColor"
+          />
+        {/each}
+      </svg>
+    {/if}
+  </div>
+
+  {#if title}
+    <span class="text-xs font-light text-center tracking-wider">
+      {title}
+    </span>
   {/if}
 </div>
