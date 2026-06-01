@@ -80,7 +80,7 @@
       bind:this={ref}
       href={resolve(href)}
       class={cn(
-        "flex h-full w-full gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
+        "flex h-full gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden text-lg focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
         className,
         children
           ? "flex-col justify-start items-start"
@@ -158,7 +158,7 @@
     <div
       bind:this={ref}
       class={cn(
-        "flex flex-col h-full w-full items-start justify-start gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden",
+        "flex flex-col h-full items-start justify-start gap-4 col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-6 ring-1 hover:ring-primary transition-all duration-300 group overflow-hidden",
         className,
       )}
       in:transition|global={{
@@ -185,7 +185,9 @@
           <h2>{title}</h2>
         </div>
       {/if}
-      <div class="text-sm leading-6 font-light flex w-full flex-col">
+      <div
+        class="leading-6 font-light flex w-full flex-col text-sm md:text-base"
+      >
         {@render children?.()}
       </div>
     </div>

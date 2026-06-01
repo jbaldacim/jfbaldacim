@@ -12,5 +12,5 @@
   largeDelay={850}
   {href}
 >
-  Pisa 2022
+  <p>Pisa 2022</p>
 </BentoCard>

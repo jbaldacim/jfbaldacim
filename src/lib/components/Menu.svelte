@@ -12,7 +12,7 @@
 
 {#if mounted}
   <nav
-    class="flex flex-row items-center justify-between col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-4 ring-1 px-6 hover:ring-primary transition-shadow duration-300 group"
+    class="flex flex-row items-center justify-between col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-4 ring-1 px-6 hover:ring-primary transition-shadow duration-300 group w-full"
     in:fly={{ x: -200, duration: 750, delay: 250 }}
   >
     <div>
@@ -27,7 +27,7 @@
     >
       <a href={resolve("/about")}>About</a>
       <a href={resolve("/blog")}>Blog</a>
-      <a href={resolve("/")}>Projects</a>
+      <a href={resolve("/projects")}>Projects</a>
       <a href={resolve("/")}>Contact</a>
       <ModeToggle />
     </div>

@@ -12,5 +12,5 @@
   largeDelay={850}
   {href}
 >
-  Contact info here.
+  <!-- <p>Contact info here.</p> -->
 </BentoCard>

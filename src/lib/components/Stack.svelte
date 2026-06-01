@@ -265,110 +265,110 @@
     Svelte & SvelteKit, Vite and Tailwind. For data visualization, I work
     primarily with D3, and any other data task is done with Python and its data
     ecosystem.
-  </p> -->
-  <div class="flex flex-col gap-4 w-full">
-    <div class="flex flex-row justify-between">
-      <RepulsionGrid
-        matrix={svelteIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#FF3E00", "#FFF"]}
-        idleColors={["currentColor", "transparent"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Svelte"
-      />
-      <RepulsionGrid
-        matrix={d3Icon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#F9A03C"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="D3"
-      />
-      <RepulsionGrid
-        matrix={nextJsIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#000000", "#FFFFFF", "#FFFFFF"]}
-        idleColors={["currentColor", "transparent", "currentColor"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Next.js"
-      />
-      <RepulsionGrid
-        matrix={pythonIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#306998", "#FFD43B"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Python"
-      />
-    </div>
-    <div class="flex flex-row justify-between">
-      <RepulsionGrid
-        matrix={reactIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#61DAFB"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="React"
-      />
-      <RepulsionGrid
-        matrix={tailwindCssIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#06B6D4"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Tailwind CSS"
-      />
-      <RepulsionGrid
-        matrix={typescriptIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#3178C6", "#FFFFFF"]}
-        idleColors={["currentColor", "transparent"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="TypeScript"
-      />
-      <RepulsionGrid
-        matrix={viteIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#9135FF"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Vite"
-      />
-    </div>
+    </p> -->
+  <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 w-full">
+    <RepulsionGrid
+      matrix={reactIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#61DAFB"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="React"
+    />
+    <!-- <div class="flex flex-row justify-between"> -->
+    <RepulsionGrid
+      matrix={nextJsIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#000000", "#FFFFFF", "#FFFFFF"]}
+      idleColors={["currentColor", "transparent", "currentColor"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="Next.js"
+    />
+    <RepulsionGrid
+      matrix={svelteIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#FF3E00", "#FFF"]}
+      idleColors={["currentColor", "transparent"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="Svelte"
+    />
+    <RepulsionGrid
+      matrix={d3Icon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#F9A03C"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="D3"
+    />
+    <RepulsionGrid
+      matrix={typescriptIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#3178C6", "#FFFFFF"]}
+      idleColors={["currentColor", "transparent"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="TypeScript"
+    />
+    <RepulsionGrid
+      matrix={pythonIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#306998", "#FFD43B"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="Python"
+    />
+    <!-- </div> -->
+    <!-- <div class="flex flex-row justify-between"> -->
+    <RepulsionGrid
+      matrix={tailwindCssIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#06B6D4"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="Tailwind"
+    />
+    <RepulsionGrid
+      matrix={viteIcon}
+      // width={20}
+      // height={20}
+      // resolution={2}
+      colors={["#9135FF"]}
+      renderMode="canvas"
+      repelRadius={12}
+      strength={2}
+      returnSpeed={0.15}
+      title="Vite"
+    />
+    <!-- </div> -->
   </div>
 </BentoCard>
