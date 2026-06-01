@@ -104,10 +104,12 @@
       }}
     >
       <div
-        class="flex flex-row items-center justify-between w-full group-hover:text-primary group-focus-visible:text-primary tracking-tight font-heading font-medium uppercase text-semibold pr-10"
+        class="flex flex-row items-center justify-between w-full tracking-tight font-heading font-medium uppercase text-semibold pr-10"
       >
         <h2>{title}</h2>
-        <div class="relative flex items-center justify-center">
+        <div
+          class="relative flex items-center justify-center group-hover:text-primary group-focus-visible:text-primary"
+        >
           <!-- <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -137,15 +139,11 @@
           >
             <path
               d="M7 7h10v10"
-              class={cn(
-                "transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20] group-focus-visible:[stroke-dasharray:20] group-focus-visible:[stroke-dashoffset:0]",
-              )}
+              class="transition-all duration-300 ease-in group-hover:[stroke-dasharray:20] group-hover:[stroke-dashoffset:0] [stroke-dasharray:20] [stroke-dashoffset:20] group-focus-visible:[stroke-dasharray:20] group-focus-visible:[stroke-dashoffset:0]"
             />
             <path
               d="M7 17 17 7"
-              class={cn(
-                "transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15] group-focus-visible:[stroke-dasharray:15] group-focus-visible:[stroke-dashoffset:0]",
-              )}
+              class="transition-all duration-300 ease-in delay-150 group-hover:[stroke-dasharray:15] group-hover:[stroke-dashoffset:0] [stroke-dasharray:15] [stroke-dashoffset:15] group-focus-visible:[stroke-dasharray:15] group-focus-visible:[stroke-dashoffset:0]"
             />
           </svg>
         </div>
@@ -182,7 +180,7 @@
     >
       {#if title}
         <div
-          class="text-lg uppercase text-semibold group-hover:text-primary transition-colors duration-300 tracking-tight font-heading font-medium"
+          class="text-lg uppercase text-semibold tracking-tight font-heading font-medium"
         >
           <h2>{title}</h2>
         </div>
