@@ -1,5 +1,6 @@
 <script>
   import Hero from "$lib/components/Hero.svelte";
+  import Menu from "$lib/components/Menu.svelte";
 </script>
 
 <!-- <script lang="ts">
@@ -47,7 +48,8 @@
 <div
   class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] flex items-center justify-center"
 >
-  <main class="">
+  <main class="min-w-screen min-h-screen">
+    <Menu />
     <Hero />
   </main>
 </div>

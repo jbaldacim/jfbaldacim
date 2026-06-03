@@ -12,7 +12,7 @@
 
 {#if mounted}
   <nav
-    class="flex flex-row items-center justify-between col-span-full row-span-1 ring-foreground/10 bg-card rounded-xl p-4 ring-1 px-6 hover:ring-primary transition-shadow duration-300 group w-full"
+    class="flex flex-row items-center justify-between bg-transparent py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b"
     in:fly={{ x: -200, duration: 750, delay: 250 }}
   >
     <div>

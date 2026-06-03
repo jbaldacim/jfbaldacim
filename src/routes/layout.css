@@ -241,3 +241,41 @@
     @apply font-sans;
   }
 }
+
+.gradient {
+  background-image: linear-gradient(
+    52deg,
+    hsl(210deg 4% 90%) 0%,
+    hsl(209deg 12% 81%) 8%,
+    hsl(209deg 14% 72%) 17%,
+    hsl(208deg 14% 63%) 25%,
+    hsl(208deg 14% 55%) 33%,
+    hsl(207deg 14% 47%) 42%,
+    hsl(207deg 18% 40%) 50%,
+    hsl(207deg 14% 35%) 58%,
+    hsl(207deg 11% 29%) 67%,
+    hsl(207deg 8% 24%) 75%,
+    hsl(207deg 5% 17%) 83%,
+    hsl(207deg 3% 11%) 92%,
+    hsl(0deg 0% 4%) 100%
+  );
+}
+
+/* .gradient {
+  background-image: linear-gradient(
+    45deg,
+    hsl(210deg 4% 90%) 0%,
+    hsl(210deg 6% 82%) 1%,
+    hsl(207deg 8% 73%) 3%,
+    hsl(208deg 11% 65%) 9%,
+    hsl(209deg 13% 57%) 22%,
+    hsl(207deg 15% 48%) 53%,
+    hsl(207deg 18% 40%) 76%,
+    hsl(206deg 14% 34%) 86%,
+    hsl(208deg 12% 28%) 93%,
+    hsl(204deg 9% 22%) 96%,
+    hsl(204deg 6% 16%) 98%,
+    hsl(240deg 2% 10%) 100%,
+    hsl(0deg 0% 4%) 100%
+  );
+} */
