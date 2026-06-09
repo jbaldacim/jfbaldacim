@@ -1,7 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
-  import { fly } from "svelte/transition";
-  import ModeToggle from "$lib/components/ModeToggle.svelte";
+  // import { fly } from "svelte/transition";
   import { onMount } from "svelte";
 
   let mounted = $state(false);
@@ -12,8 +11,8 @@
 
 {#if mounted}
   <nav
-    class="flex flex-row items-center justify-between bg-transparent py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b"
-    in:fly={{ x: -200, duration: 750, delay: 250 }}
+    class="flex flex-row items-center justify-between bg-card py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b"
+    // in:fly={{ x: -200, duration: 750, delay: 250 }}
   >
     <div>
       <span
@@ -29,7 +28,6 @@
       <a href={resolve("/blog")}>Blog</a>
       <a href={resolve("/projects")}>Projects</a>
       <a href={resolve("/")}>Contact</a>
-      <ModeToggle />
     </div>
   </nav>
 {/if}

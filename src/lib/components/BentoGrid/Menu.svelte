@@ -1,7 +1,6 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { fly } from "svelte/transition";
-  import ModeToggle from "$lib/components/ModeToggle.svelte";
   import { onMount } from "svelte";
 
   let mounted = $state(false);
@@ -29,7 +28,6 @@
       <a href={resolve("/blog")}>Blog</a>
       <a href={resolve("/projects")}>Projects</a>
       <a href={resolve("/")}>Contact</a>
-      <ModeToggle />
     </div>
   </nav>
 {/if}
