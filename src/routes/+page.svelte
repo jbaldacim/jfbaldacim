@@ -1,5 +1,6 @@
 <script>
   import About from "$lib/components/About.svelte";
+  import Stack from "$lib/components/Stack.svelte";
   import Hero from "$lib/components/Hero.svelte";
   import Menu from "$lib/components/Menu.svelte";
 </script>
@@ -53,5 +54,6 @@
     <Menu />
     <Hero />
     <About />
+    <Stack />
   </main>
 </div>
