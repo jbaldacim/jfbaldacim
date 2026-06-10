@@ -166,7 +166,7 @@
     const offsetX = (W - gridW) / 2;
     const offsetY = (H - gridH) / 2;
     const subCellSize = cellSize / res;
-    const radius = subCellSize * 0.46;
+    const radius = subCellSize * 0.41;
 
     const pArray = new Float32Array(circleCount * STRIDE);
 

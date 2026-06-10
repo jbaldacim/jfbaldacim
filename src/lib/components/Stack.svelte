@@ -217,6 +217,60 @@
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 
+  export const nodeIcon = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+    [0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ];
+
+  export const expressIcon = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ];
+
   // Possible Vite icon
   // export const viteIcon = [
   //   [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -250,111 +304,150 @@
   <div
     class="max-w-7xl w-full p-8 pt-16 [&_p]:max-w-[65ch] [&_p]:leading-normal [&_p]:font-light [&_p:not(:last-child)]:pb-6"
   >
-    <h2 class="font-semibold text-2xl pb-10">Stack</h2>
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 w-full">
-      <RepulsionGrid
-        matrix={reactIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#61DAFB"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="React"
-      />
-      <!-- <div class="flex flex-row justify-between"> -->
-      <RepulsionGrid
-        matrix={nextJsIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#000000", "#FFFFFF", "#FFFFFF"]}
-        idleColors={["currentColor", "transparent", "currentColor"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Next.js"
-      />
-      <RepulsionGrid
-        matrix={svelteIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#FF3E00", "#FFF"]}
-        idleColors={["currentColor", "transparent"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Svelte"
-      />
-      <RepulsionGrid
-        matrix={d3Icon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#F9A03C"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="D3"
-      />
-      <RepulsionGrid
-        matrix={typescriptIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#3178C6", "#FFFFFF"]}
-        idleColors={["currentColor", "transparent"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="TypeScript"
-      />
-      <RepulsionGrid
-        matrix={pythonIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#306998", "#FFD43B"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Python"
-      />
-      <!-- </div> -->
-      <!-- <div class="flex flex-row justify-between"> -->
-      <RepulsionGrid
-        matrix={tailwindCssIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#06B6D4"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Tailwind"
-      />
-      <RepulsionGrid
-        matrix={viteIcon}
-        // width={20}
-        // height={20}
-        // resolution={2}
-        colors={["#9135FF"]}
-        renderMode="canvas"
-        repelRadius={12}
-        strength={2}
-        returnSpeed={0.15}
-        title="Vite"
-      />
-      <!-- </div> -->
+    <h2 class="font-semibold text-3xl pb-12">Stack</h2>
+
+    <div class="pb-12">
+      <h3
+        class="text-sm font-semibold uppercase tracking-wider text-neutral-400 pb-4"
+      >
+        Apps & UI Frameworks
+      </h3>
+      <div class="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 w-full">
+        <RepulsionGrid
+          matrix={nextJsIcon}
+          colors={["#000000", "#FFFFFF", "#FFFFFF"]}
+          idleColors={["currentColor", "transparent", "currentColor"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Next.js"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={reactIcon}
+          colors={["#61DAFB"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="React"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={svelteIcon}
+          colors={["#FF3E00", "#FFF"]}
+          idleColors={["currentColor", "transparent"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Svelte"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={tailwindCssIcon}
+          colors={["#06B6D4"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Tailwind"
+          width={96}
+          height={96}
+        />
+      </div>
+    </div>
+
+    <div class="pb-12">
+      <h3
+        class="text-sm font-semibold uppercase tracking-wider text-neutral-400 pb-4"
+      >
+        Languages & Tooling
+      </h3>
+      <div class="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 w-full">
+        <RepulsionGrid
+          matrix={typescriptIcon}
+          colors={["#3178C6", "#FFFFFF"]}
+          idleColors={["currentColor", "transparent"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="TypeScript"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={nodeIcon}
+          colors={["#5FA04E"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Node.js"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={expressIcon}
+          colors={["#FFFFFF"]}
+          idleColors={["currentColor"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Express"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={viteIcon}
+          colors={["#9135FF"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Vite"
+          width={96}
+          height={96}
+        />
+      </div>
+    </div>
+
+    <div>
+      <h3
+        class="text-sm font-semibold uppercase tracking-wider text-neutral-400 pb-4"
+      >
+        Data & Analytics
+      </h3>
+      <div class="grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 gap-4 w-full">
+        <RepulsionGrid
+          matrix={pythonIcon}
+          colors={["#306998", "#FFD43B"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="Python"
+          width={96}
+          height={96}
+        />
+        <RepulsionGrid
+          matrix={d3Icon}
+          colors={["#F9A03C"]}
+          renderMode="canvas"
+          repelRadius={12}
+          strength={2}
+          returnSpeed={0.15}
+          title="D3"
+          width={96}
+          height={96}
+        />
+      </div>
     </div>
   </div>
 </section>
