@@ -1,27 +1,20 @@
-<script lang="ts">
-  import BentoCard from "./BentoCard.svelte";
-
-  let { class: className = "" } = $props();
-</script>
-
-<BentoCard
-  title="Hey, there!"
-  class={className}
-  largeX={-200}
-  largeDuration={750}
-  largeDelay={500}
-  smallX={200}
-  smallDuration={750}
-  smallDelay={500}
->
-  <p>
-    I'm João, a Full-Stack Developer building a career in Software Engineering.
-    I geek out over Front-End Development, Data Visualization, and Machine
-    Learning — turning ideas into functional and beautiful solutions.
-  </p>
-  <p>
-    Currently I'm a Systems Analysis and Development undergraduate student at
-    IFSP - Campus Boituva and I'm open to new opportunities for trainee and
-    junior positions.
-  </p>
-</BentoCard>
+<section class="w-full flex items-center justify-center">
+  <div
+    class="max-w-7xl w-full p-8 pt-16 [&_p]:max-w-[65ch] [&_p]:leading-normal [&_p]:font-light [&_p:not(:last-child)]:pb-6"
+  >
+    <h2 class="font-semibold text-2xl pb-10">About Me</h2>
+    <p>
+      Hello! My name is João and I enjoy building for the web and solving
+      problems with data. I am passionate about problem-solving, storytelling
+      and knowledge sharing.
+    </p>
+    <p>
+      After studying 4 years to be a Mathematics teacher, I decided to switch to
+      Software Development and I'm currently pursuing a degree in Systems
+      Analysis and Development at IFSP - Campus Boituva, where my mathematical
+      background has been helping me approach problems systematically and find
+      creative solutions.
+    </p>
+    <p>I am open to new opportunities for trainee and junior positions.</p>
+  </div>
+</section>
