@@ -1,6 +1,77 @@
-<section class="h-screen flex items-center justify-center gradient">
-  <div class="max-w-7xl w-full p-8">
-    <div class="w-fit p-8 bg-muted/40 rounded-lg">
+<script>
+  import { onMount } from "svelte";
+  import * as d3 from "d3";
+
+  let svgEl = $state();
+  let sectionEl = $state();
+
+  onMount(() => {
+    const W = sectionEl.offsetWidth;
+    const H = sectionEl.offsetHeight;
+
+    const svg = d3
+      .select(svgEl)
+      .attr("viewBox", `0 0 ${W} ${H}`)
+      .attr("preserveAspectRatio", "xMidYMid slice");
+
+    const rng = d3.randomUniform.source(d3.randomLcg(42))(0, 1);
+    const points = Array.from({ length: 300 }, () => [rng() * W, rng() * H]);
+
+    const delaunay = d3.Delaunay.from(points);
+    const voronoi = delaunay.voronoi([0, 0, W, H]);
+
+    const cellGroup = svg.append("g");
+    const dotGroup = svg.append("g");
+
+    const cells = cellGroup
+      .selectAll("path")
+      .data(points)
+      .join("path")
+      .attr("class", "v-cell")
+      .attr("d", (_, i) => voronoi.renderCell(i));
+
+    const dots = dotGroup
+      .selectAll("circle")
+      .data(points)
+      .join("circle")
+      .attr("class", "v-point")
+      .attr("cx", (d) => d[0])
+      .attr("cy", (d) => d[1])
+      .attr("r", 1)
+      .style("opacity", 0)
+      .transition()
+      .delay((_, i) => i * 10)
+      .duration(200)
+      .style("opacity", 1);
+
+    cells
+      .on("mouseenter", (_, d) => {
+        const i = points.indexOf(d);
+        dots
+          .filter((_, j) => j === i)
+          .style("opacity", 0)
+          .style("transition-delay", "0ms");
+      })
+      .on("mouseleave", (_, d) => {
+        const i = points.indexOf(d);
+        dots
+          .filter((_, j) => j === i)
+          .style("opacity", 1)
+          .style("transition-delay", "700ms");
+      });
+
+    svg.classed("gradient", true);
+  });
+</script>
+
+<section
+  bind:this={sectionEl}
+  class="relative h-screen flex items-center justify-center bg-background"
+>
+  <svg bind:this={svgEl} class="absolute inset-0 w-full h-full"></svg>
+
+  <div class="relative z-10 max-w-7xl w-full p-8 pointer-events-none">
+    <div class="w-fit p-8 bg-muted/60 rounded-lg">
       <span class="text-sm tracking-tight">Hey, there! I'm</span>
       <h1 class="tracking-wider font-bold uppercase text-7xl mt-8">
         João<br />Baldacim
@@ -10,12 +81,32 @@
         out over Front-End Development, Data Visualization, and Machine Learning
         — turning ideas into functional and beautiful solutions.
       </p>
-
-      <!-- <p class="mt-6 leading-relaxed max-w-xl">
-      Currently I'm a Systems Analysis and Development undergraduate student at
-      IFSP - Campus Boituva and I'm open to new opportunities for trainee and
-      junior positions.
-      </p> -->
     </div>
   </div>
 </section>
+
+<style>
+  :global(.v-cell) {
+    fill: oklch(18.389% 0.00518 219.937);
+    stroke: oklch(18.389% 0.00518 219.937);
+    stroke-width: 1px;
+    transition: fill 300ms;
+    transition-delay: 700ms;
+  }
+
+  :global(.v-cell:hover) {
+    fill: transparent;
+    stroke: transparent;
+    transition:
+      fill 0ms,
+      stroke 0ms;
+    transition-delay: 0ms;
+  }
+
+  :global(.v-point) {
+    fill: hsl(0deg 0% 65%);
+    pointer-events: none;
+    transition: opacity 300ms;
+    transition-delay: 700ms;
+  }
+</style>
