@@ -38,7 +38,9 @@
       .attr("cx", (d) => d[0])
       .attr("cy", (d) => d[1])
       .attr("r", 1)
-      .style("opacity", 0)
+      .style("opacity", 0);
+
+    dots
       .transition()
       .delay((_, i) => i * 10)
       .duration(200)
