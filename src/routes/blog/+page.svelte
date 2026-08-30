@@ -10,12 +10,12 @@
 </svelte:head>
 
 <div
-  class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] min-h-screen flex flex-col"
+  class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] min-h-screen flex flex-col pt-14.25"
 >
   <Menu />
 
   <main class="max-w-3xl mx-auto p-4 md:p-6 w-full flex-1">
-    <h1 class="text-3xl font-bold font-heading mt-6 mb-8">Blog</h1>
+    <h1 class="text-3xl font-bold font-heading mb-8">Blog</h1>
 
     <div class="flex flex-col gap-4">
       {#each data.posts as post (post.slug)}

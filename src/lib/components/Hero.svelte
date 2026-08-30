@@ -75,7 +75,7 @@
   <div class="relative z-10 max-w-7xl w-full p-8 pointer-events-none">
     <div class="w-fit p-8 bg-muted/60 rounded-lg">
       <span class="text-sm tracking-tight">Hey, there! I'm</span>
-      <h1 class="tracking-wider font-bold uppercase text-7xl mt-8">
+      <h1 class="tracking-wider font-bold uppercase text-4xl md:text-7xl mt-8">
         João<br />Baldacim
       </h1>
       <p class="mt-6 leading-relaxed max-w-xl font-light">

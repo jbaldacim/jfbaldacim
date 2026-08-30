@@ -13,16 +13,16 @@
 </svelte:head>
 
 <div
-  class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] min-h-screen flex flex-col"
+  class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] min-h-screen flex flex-col pt-14.25"
 >
   <Menu />
-  <a
-    href={resolve("/blog")}
-    class="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors duration-300 mt-10 p-4 md:p-6"
-  >
-    ← Back to blog
-  </a>
   <main class="max-w-3xl mx-auto p-4 md:p-6 bg-background flex-1">
+    <a
+      href={resolve("/blog")}
+      class="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+    >
+      ← Back to blog
+    </a>
     <header class="mt-4 mb-8 flex flex-col gap-3">
       <h1 class="text-3xl font-bold font-heading">{post.metadata.title}</h1>
 
@@ -50,7 +50,7 @@
     </header>
 
     <article
-      class="prose prose-invert prose-headings:font-heading prose-a:text-primary max-w-none mb-16"
+      class="prose prose-invert prose-headings:font-heading prose-a:text-primary max-w-none mb-16 md:min-w-3xl"
     >
       <Component />
     </article>
