@@ -1,6 +1,6 @@
 import { mdsvex } from "mdsvex";
 import adapter from "@sveltejs/adapter-static";
-import { codeToHtml } from "shiki";
+import { createHighlighter } from "shiki";
 import { escapeSvelte } from "mdsvex";
 import { transformerMetaHighlight } from "@shikijs/transformers";
 import { transformerNotationHighlight } from "@shikijs/transformers";
@@ -26,7 +26,22 @@ const config = {
       extensions: [".svx", ".md"],
       highlight: {
         highlighter: async (code, lang, meta) => {
-          const rawHtml = await codeToHtml(code, {
+          const highlighter = await createHighlighter({
+            themes: ["one-dark-pro"],
+            langs: [
+              "javascript",
+              "typescript",
+              "svelte",
+              "markdown",
+              "yaml",
+              "css",
+              "json",
+              "python",
+              "jsx",
+            ],
+          });
+
+          const rawHtml = highlighter.codeToHtml(code, {
             lang: lang,
             theme: "one-dark-pro",
             meta: { __raw: meta },
