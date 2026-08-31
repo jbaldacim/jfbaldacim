@@ -1,6 +1,5 @@
 import { postsList } from "$lib/posts";
-import type { PageLoad } from "./$types";
 
-export const load: PageLoad = () => {
+export const load = () => {
   return { posts: postsList };
 };
