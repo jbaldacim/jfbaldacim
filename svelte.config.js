@@ -1,5 +1,9 @@
 import { mdsvex } from "mdsvex";
 import adapter from "@sveltejs/adapter-static";
+import { codeToHtml } from "shiki";
+import { escapeSvelte } from "mdsvex";
+import { transformerMetaHighlight } from "@shikijs/transformers";
+import { transformerNotationHighlight } from "@shikijs/transformers";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,7 +21,48 @@ const config = {
       strict: true,
     }),
   },
-  preprocess: [mdsvex({ extensions: [".svx", ".md"] })],
+  preprocess: [
+    mdsvex({
+      extensions: [".svx", ".md"],
+      highlight: {
+        highlighter: async (code, lang, meta) => {
+          const rawHtml = await codeToHtml(code, {
+            lang: lang,
+            theme: "one-dark-pro",
+            meta: { __raw: meta },
+            transformers: [
+              transformerMetaHighlight(),
+              transformerNotationHighlight(),
+            ],
+          });
+
+          const filenameMatch = meta?.match(/filename="([^"]+)"/);
+          const filename = filenameMatch ? filenameMatch[1] : "";
+
+          const codeBase64 = Buffer.from(code).toString("base64");
+
+          // Cabeçalho gerado já no build-time / SSR
+          const headerHtml = `
+            <div class="code-header">
+              <span class="code-filename">${filename}</span>
+              <button class="copy-btn" type="button" data-code="${codeBase64}">Copy</button>
+            </div>
+          `;
+
+          const wrappedHtml = `
+            <div class="code-block-wrapper">
+              ${headerHtml}
+              ${rawHtml}
+            </div>
+          `;
+
+          const html = escapeSvelte(wrappedHtml);
+
+          return html;
+        },
+      },
+    }),
+  ],
   extensions: [".svelte", ".svx", ".md"],
 };
 

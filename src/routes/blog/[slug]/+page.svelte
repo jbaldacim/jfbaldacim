@@ -1,6 +1,7 @@
 <script lang="ts">
   import Menu from "$lib/components/Menu.svelte";
   import { resolve } from "$app/paths";
+  import { copyCode } from "$lib/actions/copyCode.js";
 
   let { data } = $props();
 
@@ -16,7 +17,7 @@
   class="bg-[radial-gradient(ellipse_80%_80%_at_25%_25%,transparent_40%,var(--color-background)_100%),radial-gradient(var(--dot-color)_1px,transparent_1px)] bg-size-[auto,24px_24px] min-h-screen flex flex-col pt-14.25"
 >
   <Menu />
-  <main class="max-w-3xl mx-auto p-4 md:p-6 bg-background flex-1">
+  <main class="max-w-4xl mx-auto p-4 md:p-6 bg-background flex-1 w-full">
     <a
       href={resolve("/blog")}
       class="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -50,7 +51,8 @@
     </header>
 
     <article
-      class="prose prose-invert prose-headings:font-heading prose-a:text-primary max-w-none mb-16 md:min-w-3xl"
+      class="prose prose-invert prose-headings:font-heading prose-a:text-primary max-w-none mb-16 md:min-w-full"
+      use:copyCode
     >
       <Component />
     </article>
