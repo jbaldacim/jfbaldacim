@@ -1,30 +1,21 @@
-const posts = import.meta.glob<{
-  metadata: {
-    title: string;
-    date: string;
-    tags: string[];
-    description?: string;
-  };
-}>("/src/lib/posts/*.md", { eager: true });
-
-export const postsList: Array<{
+interface PostMetadata {
   title: string;
   date: string;
   tags: string[];
   description?: string;
-  slug: string;
-}> = [];
-
-for (const [key, value] of Object.entries(posts)) {
-  postsList.push({
-    title: value.metadata.title,
-    date: value.metadata.date,
-    tags: value.metadata.tags,
-    description: value.metadata.description,
-    slug: key.split("/").at(-1)!.replace(/\.md$/, ""),
-  });
 }
 
-postsList.sort(
-  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-);
+type Post = PostMetadata & { slug: string };
+
+const posts = import.meta.glob<{
+  metadata: PostMetadata;
+}>("/src/lib/posts/*.md", { eager: true });
+
+export const postsList: Array<Post> = Object.entries(posts)
+  .map(([key, value]) => {
+    return {
+      ...value.metadata,
+      slug: key.split("/").at(-1)!.replace(/\.md$/, ""),
+    };
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
