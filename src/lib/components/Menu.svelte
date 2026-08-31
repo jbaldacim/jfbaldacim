@@ -5,13 +5,13 @@
 </script>
 
 <nav
-  class="flex flex-row items-center justify-between bg-card py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b z-50"
+  class="flex flex-row items-center justify-between bg-card py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b z-50 h-16"
 >
   <div>
     <span
       class="tracking-wide font-bold uppercase group-hover:text-primary transition-colors duration-300"
     >
-      <a href={resolve("/")}>João Fleury Baldacim</a>
+      <a href={resolve("/")}>João Baldacim</a>
     </span>
   </div>
   <!-- Desktop menu -->
@@ -28,10 +28,18 @@
     <div
       class="md:hidden flex flex-col items-center justify-center gap-2 tracking-wider absolute top-full left-0 w-full bg-card border-b py-2"
     >
-      <a href={resolve("/about")}>About</a>
-      <a href={resolve("/blog")}>Blog</a>
-      <a href={resolve("/projects")}>Projects</a>
-      <a href={resolve("/")}>Contact</a>
+      <a href={resolve("/about")} onclick={() => (isMenuOpen = !isMenuOpen)}
+        >About</a
+      >
+      <a href={resolve("/blog")} onclick={() => (isMenuOpen = !isMenuOpen)}
+        >Blog</a
+      >
+      <a href={resolve("/projects")} onclick={() => (isMenuOpen = !isMenuOpen)}
+        >Projects</a
+      >
+      <a href={resolve("/")} onclick={() => (isMenuOpen = !isMenuOpen)}
+        >Contact</a
+      >
     </div>
   {/if}
   <button

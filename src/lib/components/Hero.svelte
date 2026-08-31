@@ -68,7 +68,7 @@
 
 <section
   bind:this={sectionEl}
-  class="relative h-screen flex items-center justify-center bg-background"
+  class="relative h-[calc(100vh-64px)] flex items-center justify-center bg-background"
 >
   <svg bind:this={svgEl} class="absolute inset-0 w-full h-full"></svg>
 
