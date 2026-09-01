@@ -130,6 +130,10 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+body {
+  scrollbar-gutter: stable both-edges;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -289,4 +293,16 @@
 .code-block-wrapper .has-focused:hover .line:not(.focused) {
   filter: blur(0);
   opacity: 1;
+}
+
+code {
+  &::before,
+  &::after {
+    content: "";
+  }
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  padding: 0.25rem;
+  color: #f39a71;
+  background-color: #282c34;
+  border-radius: 4px;
 }
