@@ -18,6 +18,7 @@
   <div
     class="hidden md:flex flex-row gap-2 items-center [&>a]:hover:text-primary tracking-wider transition-colors duration-300"
   >
+    <a href={resolve("/")}>Home</a>
     <a href={resolve("/about")}>About</a>
     <a href={resolve("/blog")}>Blog</a>
     <a href={resolve("/projects")}>Projects</a>
@@ -28,6 +29,7 @@
     <div
       class="md:hidden flex flex-col items-center justify-center gap-2 tracking-wider absolute top-full left-0 w-full bg-card border-b py-2"
     >
+      <a href={resolve("/")} onclick={() => (isMenuOpen = !isMenuOpen)}>Home</a>
       <a href={resolve("/about")} onclick={() => (isMenuOpen = !isMenuOpen)}
         >About</a
       >
