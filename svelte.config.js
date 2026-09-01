@@ -1,5 +1,6 @@
 import { mdsvex } from "mdsvex";
-import adapter from "@sveltejs/adapter-static";
+// import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-vercel";
 import { createHighlighter } from "shiki";
 import { escapeSvelte } from "mdsvex";
 import { transformerMetaHighlight } from "@shikijs/transformers";
@@ -16,11 +17,11 @@ const config = {
   },
   kit: {
     adapter: adapter({
-      pages: "build",
-      assets: "build",
-      fallback: undefined,
-      precompress: false,
-      strict: true,
+      // pages: "build",
+      // assets: "build",
+      // fallback: undefined,
+      // precompress: false,
+      // strict: true,
     }),
   },
   preprocess: [
