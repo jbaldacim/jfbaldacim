@@ -194,6 +194,7 @@ body {
   background-color: #282c34;
   border: 1px solid #3e4451;
   overflow: hidden;
+  margin: 32px 0;
 }
 
 /* Barra superior com nome do arquivo e botão */
@@ -233,7 +234,7 @@ body {
 /* Área de código */
 .code-block-wrapper pre {
   margin: 0;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   overflow-x: auto;
 }
 
