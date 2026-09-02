@@ -218,6 +218,11 @@
   ];
 </script>
 
+<svelte:head>
+  <title>Projects •João Baldacim</title>
+  <meta name="description" content="João Baldacim's website" />
+</svelte:head>
+
 <h2>Projects</h2>
 <div class="flex justify-between items-center px-6">
   <RepulsionGrid

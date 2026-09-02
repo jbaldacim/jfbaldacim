@@ -61,6 +61,11 @@
   ];
 </script>
 
+<svelte:head>
+  <title>João Baldacim</title>
+  <meta name="description" content="João Baldacim's website" />
+</svelte:head>
+
 <main
   class="max-w-4xl mx-auto p-4 md:p-6 flex-1 w-full items-center justify-center text-center flex flex-col"
 >
