@@ -304,7 +304,7 @@
   <div
     class="max-w-7xl w-full p-8 [&_p]:max-w-[65ch] [&_p]:leading-normal [&_p]:font-light [&_p:not(:last-child)]:pb-6"
   >
-    <h2 class="font-semibold text-3xl pb-6">Stack</h2>
+    <h2 class="font-semibold text-3xl pb-6 font-heading">Stack</h2>
 
     <div class="pb-12">
       <h3

@@ -20,7 +20,7 @@
     ← Back to blog
   </a>
   <header class="mt-4 mb-8 flex flex-col gap-3">
-    <h1 class="text-3xl font-bold font-heading">{post.metadata.title}</h1>
+    <h1 class="text-3xl font-semibold font-heading">{post.metadata.title}</h1>
 
     <div class="flex items-center gap-3 flex-wrap">
       <span class="text-xs uppercase tracking-wide text-muted-foreground">

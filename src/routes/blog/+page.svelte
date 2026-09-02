@@ -9,7 +9,7 @@
 </svelte:head>
 
 <main class="max-w-3xl mx-auto p-4 md:p-6 w-full flex-1">
-  <h1 class="text-3xl font-bold font-heading mb-8">Blog</h1>
+  <h1 class="text-3xl font-semibold font-heading mb-8">Blog</h1>
 
   <div class="flex flex-col gap-4">
     {#each data.posts as post (post.slug)}

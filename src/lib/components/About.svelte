@@ -2,7 +2,7 @@
   <div
     class="max-w-7xl w-full p-8 pt-16 [&_p]:max-w-[65ch] [&_p]:leading-normal [&_p]:font-light [&_p:not(:last-child)]:pb-3"
   >
-    <h2 class="font-semibold text-3xl pb-6">About Me</h2>
+    <h2 class="font-semibold text-3xl pb-6 font-heading">About Me</h2>
     <p>
       Hello! My name is João and I enjoy building for the web and solving
       problems with data. I am passionate about problem-solving, storytelling
