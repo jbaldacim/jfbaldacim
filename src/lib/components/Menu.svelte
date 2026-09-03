@@ -1,47 +1,67 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import { page } from "$app/state";
+  import type { Pathname } from "$app/types";
 
+  let currentPage = $derived(page.url.pathname);
   let isMenuOpen = $state(false);
+
+  interface NavLink {
+    path: Pathname;
+    text: string;
+  }
+
+  const navLinks: NavLink[] = [
+    { path: "/", text: "Home" },
+    { path: "/about", text: "About" },
+    { path: "/blog", text: "Blog" },
+    { path: "/projects", text: "Projects" },
+    { path: "/", text: "Contact" },
+  ];
 </script>
 
 <nav
-  class="flex flex-row items-center justify-between bg-card py-4 px-6 duration-300 group fixed top-0 left-0 w-full border-b z-50 h-16"
+  class="flex flex-row items-center justify-between bg-card px-6 duration-300 fixed top-0 left-0 w-full border-b z-50 h-16 [&_a[aria-current=true]]:text-primary [&_a]:md:border-y-2 [&_a]:border-card [&_a]:hover:border-b-primary/15 [&_a[aria-current=true]]:border-b-primary"
 >
-  <div>
-    <span
-      class="tracking-wide font-bold uppercase group-hover:text-primary transition-colors duration-300"
-    >
-      <a href={resolve("/")}>João Baldacim</a>
-    </span>
-  </div>
+  <span
+    class="tracking-wide font-bold uppercase hover:text-primary transition-colors duration-300"
+  >
+    <a href={resolve("/")}>João Baldacim</a>
+  </span>
   <!-- Desktop menu -->
   <div
-    class="hidden md:flex flex-row gap-2 items-center [&>a]:hover:text-primary tracking-wider transition-colors duration-300"
+    // Find indicator for hovered link
+    class="hidden md:grid grid-cols-5 gap-4 items-center [&_a]:hover:text-primary tracking-wider transition-colors duration-300 h-full [&_a]:h-full [&_a]:flex [&_a]:items-center [&_a]:justify-center [&_a]:px-2"
   >
-    <a href={resolve("/")}>Home</a>
-    <a href={resolve("/about")}>About</a>
-    <a href={resolve("/blog")}>Blog</a>
-    <a href={resolve("/projects")}>Projects</a>
-    <a href={resolve("/")}>Contact</a>
+    {#each navLinks as navLink (navLink.text)}
+      <a
+        href={resolve(navLink.path)}
+        aria-current={currentPage === navLink.path}>{navLink.text}</a
+      >
+    {/each}
+    <!-- <a href={resolve("/")} aria-current={currentPage === "/"}>Home</a>
+    <a href={resolve("/about")} aria-current={currentPage === "/about"}>About</a
+    >
+    <a href={resolve("/blog")} aria-current={currentPage === "/blog"}>Blog</a>
+    <a href={resolve("/projects")} aria-current={currentPage === "/projects"}
+      >Projects</a
+    >
+    <a href={resolve("/")}>Contact</a> -->
   </div>
   <!-- Mobile menu -->
   {#if isMenuOpen}
     <div
       class="md:hidden flex flex-col items-center justify-center gap-2 tracking-wider absolute top-full left-0 w-full bg-card border-b py-2"
     >
-      <a href={resolve("/")} onclick={() => (isMenuOpen = !isMenuOpen)}>Home</a>
-      <a href={resolve("/about")} onclick={() => (isMenuOpen = !isMenuOpen)}
-        >About</a
-      >
-      <a href={resolve("/blog")} onclick={() => (isMenuOpen = !isMenuOpen)}
-        >Blog</a
-      >
-      <a href={resolve("/projects")} onclick={() => (isMenuOpen = !isMenuOpen)}
-        >Projects</a
-      >
-      <a href={resolve("/")} onclick={() => (isMenuOpen = !isMenuOpen)}
-        >Contact</a
-      >
+      {#each navLinks as navLink (navLink.text)}
+        <a
+          href={resolve(navLink.path)}
+          aria-current={currentPage === navLink.path}
+          onclick={() => (isMenuOpen = !isMenuOpen)}
+        >
+          {navLink.text}
+        </a>
+      {/each}
     </div>
   {/if}
   <button
