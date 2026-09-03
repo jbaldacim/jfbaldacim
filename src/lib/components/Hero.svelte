@@ -4,6 +4,7 @@
 
   let svgEl = $state();
   let sectionEl = $state();
+  let visible = $state(false);
 
   onMount(() => {
     const W = sectionEl.offsetWidth;
@@ -17,6 +18,13 @@
     const rng = d3.randomUniform.source(d3.randomLcg(42))(0, 1);
     const points = Array.from({ length: 300 }, () => [rng() * W, rng() * H]);
 
+    const yRank = new Array(points.length);
+    [...points.map((p, i) => ({ i, y: p[1] }))]
+      .sort((a, b) => a.y - b.y)
+      .forEach((d, rank) => {
+        yRank[d.i] = rank;
+      });
+
     const delaunay = d3.Delaunay.from(points);
     const voronoi = delaunay.voronoi([0, 0, W, H]);
 
@@ -28,7 +36,23 @@
       .data(points)
       .join("path")
       .attr("class", "v-cell")
-      .attr("d", (_, i) => voronoi.renderCell(i));
+      .attr("d", (_, i) => voronoi.renderCell(i))
+      .style("transform-box", "view-box")
+      .style("transform-origin", (d) => `${d[0]}px ${d[1]}px`)
+      .style("transform", "scale(0)")
+      .style("opacity", 0);
+
+    const perCell = 5,
+      dur = 800;
+    const totalAnim = (points.length - 1) * perCell + dur;
+
+    cells
+      .transition()
+      .delay((_, i) => yRank[i] * perCell)
+      .duration(dur)
+      .ease(d3.easeCubicOut)
+      .style("transform", "scale(1)")
+      .style("opacity", 1);
 
     const dots = dotGroup
       .selectAll("circle")
@@ -42,9 +66,19 @@
 
     dots
       .transition()
-      .delay((_, i) => i * 10)
-      .duration(200)
+      .delay((_, i) => yRank[i] * perCell + 250)
+      .duration(500)
       .style("opacity", 1);
+
+    setTimeout(() => {
+      cells
+        .style("transform-box", null)
+        .style("transform-origin", null)
+        .style("transform", null)
+        .style("opacity", null);
+
+      visible = true;
+    }, totalAnim + 50);
 
     cells
       .on("mouseenter", (_, d) => {
@@ -72,7 +106,11 @@
 >
   <svg bind:this={svgEl} class="absolute inset-0 w-full h-full"></svg>
 
-  <div class="relative z-10 max-w-7xl w-full p-8 pointer-events-none">
+  <div
+    class="relative z-10 max-w-7xl w-full p-8 pointer-events-none transition-opacity duration-700 {visible
+      ? 'opacity-100'
+      : 'opacity-0'}"
+  >
     <div class="w-fit p-8 bg-muted/60 rounded-lg">
       <span class="text-sm tracking-tight">Hey, there! I'm</span>
       <h1 class="tracking-wider font-bold uppercase text-4xl md:text-7xl mt-8">
