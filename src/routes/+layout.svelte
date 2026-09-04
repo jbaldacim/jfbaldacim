@@ -2,6 +2,7 @@
   import "./layout.css";
   import favicon from "$lib/assets/favicon.svg";
   import Menu from "$lib/components/Menu.svelte";
+  import Footer from "$lib/components/Footer.svelte";
 
   let { children } = $props();
 </script>
@@ -15,4 +16,5 @@
 >
   <Menu />
   {@render children()}
+  <Footer />
 </div>
