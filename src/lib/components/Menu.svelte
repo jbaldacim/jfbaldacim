@@ -31,9 +31,6 @@
   <a
     href={resolve(link.path)}
     aria-current={isActive(link.path) ? "page" : undefined}
-    onclick={() => {
-      if (mobile) isMenuOpen = false;
-    }}
     class={[
       "flex items-center justify-center px-2",
       mobile ? "py-2 w-full" : "h-full border-y-2 border-card",
