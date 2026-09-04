@@ -1,10 +1,17 @@
 <script lang="ts">
+  import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
   import type { Pathname } from "$app/types";
 
   let currentPage = $derived(page.url.pathname);
   let isMenuOpen = $state(false);
+  const isActive = (path: Pathname) =>
+    path === "/" ? currentPage === "/" : currentPage.startsWith(path);
+
+  afterNavigate(() => {
+    isMenuOpen = false;
+  });
 
   interface NavLink {
     path: Pathname;
@@ -20,8 +27,28 @@
   ];
 </script>
 
+{#snippet navItem(link: NavLink, mobile = false)}
+  <a
+    href={resolve(link.path)}
+    aria-current={isActive(link.path) ? "page" : undefined}
+    onclick={() => {
+      if (mobile) isMenuOpen = false;
+    }}
+    class={[
+      "flex items-center justify-center px-2",
+      mobile ? "py-2 w-full" : "h-full border-y-2 border-card",
+      {
+        "text-primary border-b-primary": isActive(link.path),
+        "hover:border-b-primary/15 hover:text-primary": !isActive(link.path),
+      },
+    ]}
+  >
+    {link.text}
+  </a>
+{/snippet}
+
 <nav
-  class="flex flex-row items-center justify-between bg-card px-6 duration-300 fixed top-0 left-0 w-full border-b z-50 h-16 [&_a[aria-current=true]]:text-primary [&_a]:md:border-y-2 [&_a]:border-card [&_a]:hover:border-b-primary/15 [&_a[aria-current=true]]:border-b-primary"
+  class="flex flex-row items-center justify-between bg-card px-6 duration-300 fixed top-0 left-0 w-full border-b z-50 h-16"
 >
   <span
     class="tracking-wide font-bold uppercase hover:text-primary transition-colors duration-300"
@@ -30,37 +57,20 @@
   </span>
   <!-- Desktop menu -->
   <div
-    // Find indicator for hovered link
-    class="hidden md:grid grid-cols-5 gap-4 items-center [&_a]:hover:text-primary tracking-wider transition-colors duration-300 h-full [&_a]:h-full [&_a]:flex [&_a]:items-center [&_a]:justify-center [&_a]:px-2"
+    class="hidden md:grid grid-cols-5 gap-4 items-center tracking-wider transition-colors duration-300 h-full"
   >
     {#each navLinks as navLink (navLink.text)}
-      <a
-        href={resolve(navLink.path)}
-        aria-current={currentPage === navLink.path}>{navLink.text}</a
-      >
+      {@render navItem(navLink)}
     {/each}
-    <!-- <a href={resolve("/")} aria-current={currentPage === "/"}>Home</a>
-    <a href={resolve("/about")} aria-current={currentPage === "/about"}>About</a
-    >
-    <a href={resolve("/blog")} aria-current={currentPage === "/blog"}>Blog</a>
-    <a href={resolve("/projects")} aria-current={currentPage === "/projects"}
-      >Projects</a
-    >
-    <a href={resolve("/")}>Contact</a> -->
   </div>
   <!-- Mobile menu -->
   {#if isMenuOpen}
     <div
+      id="mobile-menu"
       class="md:hidden flex flex-col items-center justify-center gap-2 tracking-wider absolute top-full left-0 w-full bg-card border-b py-2"
     >
       {#each navLinks as navLink (navLink.text)}
-        <a
-          href={resolve(navLink.path)}
-          aria-current={currentPage === navLink.path}
-          onclick={() => (isMenuOpen = !isMenuOpen)}
-        >
-          {navLink.text}
-        </a>
+        {@render navItem(navLink, true)}
       {/each}
     </div>
   {/if}
@@ -69,6 +79,8 @@
     class:open={isMenuOpen}
     onclick={() => (isMenuOpen = !isMenuOpen)}
     aria-label="Toggle menu"
+    aria-expanded={isMenuOpen}
+    aria-controls="mobile-menu"
   >
     <span></span><span></span><span></span>
     <span></span><span></span><span></span>
