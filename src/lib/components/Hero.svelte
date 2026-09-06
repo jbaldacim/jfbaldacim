@@ -18,12 +18,14 @@
     const rng = d3.randomUniform.source(d3.randomLcg(42))(0, 1);
     const points = Array.from({ length: 300 }, () => [rng() * W, rng() * H]);
 
-    const yRank = new Array(points.length);
-    [...points.map((p, i) => ({ i, y: p[1] }))]
-      .sort((a, b) => a.y - b.y)
-      .forEach((d, rank) => {
-        yRank[d.i] = rank;
-      });
+    // const yRank = new Array(points.length);
+    // [...points.map((p, i) => ({ i, y: p[1] }))]
+    //   .sort((a, b) => a.y - b.y)
+    //   .forEach((d, rank) => {
+    //     yRank[d.i] = rank;
+    //   });
+
+    const yRank = d3.shuffle(d3.range(points.length));
 
     const delaunay = d3.Delaunay.from(points);
     const voronoi = delaunay.voronoi([0, 0, W, H]);
