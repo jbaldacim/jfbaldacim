@@ -1,6 +1,7 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { copyCode } from "$lib/actions/copyCode.js";
+  import Badge from "$lib/components/Badge.svelte";
 
   let { data } = $props();
 
@@ -34,11 +35,7 @@
       {#if post.metadata.tags?.length}
         <div class="flex gap-2 flex-wrap">
           {#each post.metadata.tags as tag (tag)}
-            <span
-              class="text-xs px-2 py-0.5 rounded-full ring-1 ring-foreground/10 bg-card text-muted-foreground"
-            >
-              {tag}
-            </span>
+            <Badge>{tag}</Badge>
           {/each}
         </div>
       {/if}

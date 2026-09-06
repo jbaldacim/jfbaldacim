@@ -1,11 +1,11 @@
-interface PostMetadata {
+export interface PostMetadata {
   title: string;
   date: string;
   tags: string[];
   description?: string;
 }
 
-type Post = PostMetadata & { slug: string };
+export type Post = PostMetadata & { slug: string };
 
 const posts = import.meta.glob<{
   metadata: PostMetadata;
