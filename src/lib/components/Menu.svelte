@@ -23,7 +23,7 @@
     { path: "/about", text: "About" },
     { path: "/blog", text: "Blog" },
     { path: "/projects", text: "Projects" },
-    { path: "/", text: "Contact" },
+    { path: "/contact", text: "Contact" },
   ];
 </script>
 
