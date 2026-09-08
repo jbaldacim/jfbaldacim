@@ -7,10 +7,12 @@
 	let { data } = $props();
 
 	const uniqueTags = extractUniqueTags(data.posts);
-	const perPage = 5;
+	const perPage = 4;
 
 	let activeTags: string[] = $state([]);
 	let currentPage = $state(1);
+	let previousPage = 0;
+	let direction = $state(1);
 	let filteredPosts = $derived(filterAndSortPosts(data.posts, activeTags));
 	let totalPages = $derived(Math.ceil(filteredPosts.length / perPage) || 1);
 	let paginatedPosts = $derived(paginate(filteredPosts, currentPage, perPage));
@@ -18,6 +20,13 @@
 	$effect(() => {
 		activeTags;
 		currentPage = 1;
+	});
+
+	$effect.pre(() => {
+		if (currentPage !== previousPage) {
+			direction = currentPage >= previousPage ? 1 : -1;
+			previousPage = currentPage;
+		}
 	});
 </script>
 
@@ -29,7 +38,7 @@
 	<h1 class="font-heading text-3xl font-semibold">Blog</h1>
 	<div class="grid gap-4 pt-6 lg:grid-cols-[1fr_200px]">
 		<div class="flex flex-col gap-4">
-			<PostList posts={paginatedPosts} />
+			<PostList posts={paginatedPosts} {direction} variant="paginated" />
 			<Pagination bind:currentPage {totalPages} />
 		</div>
 		<aside class="hidden lg:block">
