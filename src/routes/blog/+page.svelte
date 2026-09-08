@@ -1,41 +1,39 @@
 <script lang="ts">
-  import CategoriesFilter from "$lib/components/CategoriesFilter.svelte";
-  import PostList from "$lib/components/PostList.svelte";
+	import CategoriesFilter from '$lib/components/CategoriesFilter.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
+	import PostList from '$lib/components/PostList.svelte';
+	import { extractUniqueTags, filterAndSortPosts, paginate } from '$lib/utils/posts.js';
 
-  let { data } = $props();
+	let { data } = $props();
 
-  const tags = data.posts
-    .map((post) => post.tags)
-    .flat()
-    .filter(Boolean);
+	const uniqueTags = extractUniqueTags(data.posts);
+	const perPage = 5;
 
-  const uniqueTags = [...new Set(tags)];
+	let activeTags: string[] = $state([]);
+	let currentPage = $state(1);
+	let filteredPosts = $derived(filterAndSortPosts(data.posts, activeTags));
+	let totalPages = $derived(Math.ceil(filteredPosts.length / perPage) || 1);
+	let paginatedPosts = $derived(paginate(filteredPosts, currentPage, perPage));
 
-  let activeTags: string[] = $state([]);
-
-  let filteredPosts = $derived(
-    data.posts
-      .filter(
-        (post) =>
-          activeTags.length == 0 ||
-          activeTags.every((tag) => post.tags?.includes(tag)),
-      )
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-  );
+	$effect(() => {
+		activeTags;
+		currentPage = 1;
+	});
 </script>
 
 <svelte:head>
-  <title>Blog · João Baldacim</title>
+	<title>Blog · João Baldacim</title>
 </svelte:head>
 
-<main class="max-w-350 mx-auto p-4 md:p-6 w-full flex-1">
-  <h1 class="text-3xl font-semibold font-heading">Blog</h1>
-  <div class="grid lg:grid-cols-[1fr_200px] pt-6 gap-4">
-    <div class="flex flex-col gap-4">
-      <PostList posts={filteredPosts} />
-    </div>
-    <aside class="hidden lg:block">
-      <CategoriesFilter tags={uniqueTags} bind:selected={activeTags} />
-    </aside>
-  </div>
+<main class="mx-auto w-full max-w-350 flex-1 p-4 md:p-6">
+	<h1 class="font-heading text-3xl font-semibold">Blog</h1>
+	<div class="grid gap-4 pt-6 lg:grid-cols-[1fr_200px]">
+		<div class="flex flex-col gap-4">
+			<PostList posts={paginatedPosts} />
+			<Pagination bind:currentPage {totalPages} />
+		</div>
+		<aside class="hidden lg:block">
+			<CategoriesFilter tags={uniqueTags} bind:selected={activeTags} />
+		</aside>
+	</div>
 </main>
