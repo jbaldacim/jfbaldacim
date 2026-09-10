@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
+	import { resolve } from '$app/paths';
 
 	let svgEl = $state();
 	let sectionEl = $state();
@@ -113,16 +114,31 @@
 			? 'opacity-100'
 			: 'opacity-0'}"
 	>
-		<div class="w-fit rounded-lg bg-muted/60 p-8">
+		<div class="w-fit bg-muted/60 p-8 backdrop-blur-xs">
 			<span class="tracking-tight">Hey, there! I'm</span>
-			<h1 class="mt-2 text-4xl font-bold tracking-wider text-primary uppercase md:text-7xl">
+			<h1 class="py-6 text-4xl font-bold tracking-wider text-primary uppercase md:text-7xl">
 				João<br />Baldacim
 			</h1>
-			<p class="mt-6 max-w-xl text-xl leading-relaxed font-light">
+			<p class="max-w-xl text-xl leading-relaxed font-light">
 				Full-Stack Developer building a career in Software Engineering. I geek out over Front-End
 				Development, Data Visualization, and Machine Learning — turning ideas into functional and
 				beautiful solutions.
 			</p>
+
+			<div class="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
+				<a
+					href={resolve('/contact')}
+					class="inline-flex items-center bg-primary/15 px-4 py-2 text-xs font-medium text-primary-foreground ring-1 ring-primary transition-all duration-300 select-none hover:bg-primary/25"
+				>
+					Get in touch
+				</a>
+				<a
+					href={resolve('/projects')}
+					class="inline-flex items-center px-4 py-2 text-xs font-medium text-muted-foreground ring-1 ring-foreground/10 transition-all duration-300 select-none hover:text-foreground hover:ring-primary"
+				>
+					See projects
+				</a>
+			</div>
 		</div>
 	</div>
 </section>
