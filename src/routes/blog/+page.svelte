@@ -7,7 +7,7 @@
 	let { data } = $props();
 
 	const uniqueTags = extractUniqueTags(data.posts);
-	const perPage = 4;
+	const perPage = 5;
 
 	let activeTags: string[] = $state([]);
 	let currentPage = $state(1);
@@ -34,7 +34,7 @@
 	<title>Blog · João Baldacim</title>
 </svelte:head>
 
-<main class="mx-auto w-full max-w-350 flex-1 p-4 md:p-6">
+<main class="mx-auto w-full max-w-350 flex-1 overflow-x-clip p-4 md:p-6">
 	<h1 class="font-heading text-3xl font-semibold">Blog</h1>
 	<div class="grid gap-4 pt-6 lg:grid-cols-[1fr_200px]">
 		<div class="flex flex-col gap-4">
