@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact · João Baldacim</title>
+	<title>Contact • João Baldacim</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-3xl flex-1 bg-background p-4 md:p-6">

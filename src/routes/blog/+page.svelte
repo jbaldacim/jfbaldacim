@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>Blog · João Baldacim</title>
+	<title>Blog • João Baldacim</title>
 </svelte:head>
 
 <main class="mx-auto w-full max-w-350 flex-1 overflow-x-clip p-4 md:p-6">
