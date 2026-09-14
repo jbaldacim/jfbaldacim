@@ -329,6 +329,28 @@ export const d3Icon: IconData = {
 	colors: ['#F9A03C']
 };
 
+export const allIcons: IconData[] = [
+	nextJsIcon,
+	reactIcon,
+	svelteIcon,
+	tailwindCssIcon,
+	typescriptIcon,
+	nodeIcon,
+	expressIcon,
+	viteIcon,
+	pythonIcon,
+	d3Icon
+];
+
+// Dicionário indexado pelo title (em minúsculas para buscas seguras)
+export const availableIcons: Record<string, IconData> = allIcons.reduce(
+	(acc, icon) => {
+		acc[icon.title.toLowerCase()] = icon;
+		return acc;
+	},
+	{} as Record<string, IconData>
+);
+
 // Possible Vite icon
 // export const viteIcon = [
 //   [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
