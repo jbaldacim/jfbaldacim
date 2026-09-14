@@ -26,48 +26,37 @@
 			</h3>
 			<div class="grid w-full grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
 				<RepulsionGrid
-					matrix={nextJsIcon}
-					colors={['#000000', '#FFFFFF', '#FFFFFF']}
-					idleColors={['currentColor', 'transparent', 'currentColor']}
+					{...nextJsIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Next.js"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={reactIcon}
-					colors={['#61DAFB']}
+					{...reactIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="React"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={svelteIcon}
-					colors={['#FF3E00', '#FFF']}
-					idleColors={['currentColor', 'transparent']}
+					{...svelteIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Svelte"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={tailwindCssIcon}
-					colors={['#06B6D4']}
-					renderMode="canvas"
+					{...tailwindCssIcon}
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Tailwind"
 					width={96}
 					height={96}
 				/>
@@ -80,48 +69,38 @@
 			</h3>
 			<div class="grid w-full grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
 				<RepulsionGrid
-					matrix={typescriptIcon}
-					colors={['#3178C6', '#FFFFFF']}
-					idleColors={['currentColor', 'transparent']}
+					{...typescriptIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="TypeScript"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={nodeIcon}
-					colors={['#5FA04E']}
+					{...nodeIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Node.js"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={expressIcon}
-					colors={['#FFFFFF']}
-					idleColors={['currentColor']}
+					{...expressIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Express"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={viteIcon}
-					colors={['#9135FF']}
+					{...viteIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Vite"
 					width={96}
 					height={96}
 				/>
@@ -134,24 +113,20 @@
 			</h3>
 			<div class="grid w-full grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-4">
 				<RepulsionGrid
-					matrix={pythonIcon}
-					colors={['#306998', '#FFD43B']}
+					{...pythonIcon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="Python"
 					width={96}
 					height={96}
 				/>
 				<RepulsionGrid
-					matrix={d3Icon}
-					colors={['#F9A03C']}
+					{...d3Icon}
 					renderMode="canvas"
 					repelRadius={12}
 					strength={2}
 					returnSpeed={0.15}
-					title="D3"
 					width={96}
 					height={96}
 				/>
