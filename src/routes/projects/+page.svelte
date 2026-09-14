@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ProjectCursorPreview from '$lib/components/ProjectCursorPreview.svelte';
 	import ProjectList from '$lib/components/ProjectList.svelte';
 	import type { Project } from '$lib/projects';
+	// import { Spring } from 'svelte/motion';
 
 	const projects: Project[] = [
 		{
@@ -35,5 +35,3 @@
 
 	<ProjectList {projects} bind:activeProject />
 </main>
-
-<ProjectCursorPreview project={activeProject} />

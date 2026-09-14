@@ -28,7 +28,7 @@
 	<h2 class="text-3xl transition-transform duration-300">
 		{project.title}
 	</h2>
-	<p class="text-sm font-light">{project.description}</p>
+	<p class="sr-only">{project.description}</p>
 	<div class="absolute bottom-6 left-6 grid grid-cols-3 gap-4">
 		{#each project.stack as tech (tech)}
 			{@const icon = availableIcons[tech.toLowerCase()]}
@@ -41,28 +41,9 @@
 					height={iconSize}
 					{dotScale}
 					title=""
+					style="shape-rendering: geometricPrecision; vector-effect: non-scaling-stroke"
 				/>
 			{/if}
 		{/each}
-		<!-- <RepulsionGrid
-			{...reactIcon}
-			renderMode="svg"
-			repelRadius={12}
-			strength={0}
-			returnSpeed={0.15}
-			{dotScale}
-			width={iconSize}
-			height={iconSize}
-		/>
-		<RepulsionGrid
-			{...viteIcon}
-			renderMode="svg"
-			repelRadius={12}
-			strength={0}
-			returnSpeed={0.15}
-			{dotScale}
-			width={iconSize}
-			height={iconSize}
-		/> -->
 	</div>
 </a>

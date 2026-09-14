@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { Project } from '$lib/projects';
+	import { Spring } from 'svelte/motion';
+	import ProjectCursorPreview from './ProjectCursorPreview.svelte';
 	import ProjectListItem from './ProjectListItem.svelte';
 
 	interface Props {
@@ -8,7 +10,24 @@
 	}
 
 	let { projects, activeProject = $bindable() }: Props = $props();
+
+	const coords = new Spring(
+		{ x: 0, y: 0 },
+		{
+			stiffness: 0.12,
+			damping: 0.6
+		}
+	);
 </script>
+
+<svelte:window
+	onmousemove={(event) => {
+		coords.set({
+			x: event.clientX,
+			y: event.clientY
+		});
+	}}
+/>
 
 <!--
     Could use
@@ -24,5 +43,6 @@
 			onmouseenter={(project) => (activeProject = project)}
 			onmouseleave={() => (activeProject = undefined)}
 		/>
+		<ProjectCursorPreview project={activeProject} {coords} />
 	{/each}
 </div>
