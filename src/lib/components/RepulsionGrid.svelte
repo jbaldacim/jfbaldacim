@@ -78,6 +78,7 @@
 		strength?: number;
 		returnSpeed?: number;
 		damping?: number;
+		dotScale?: number;
 		renderMode?: 'canvas' | 'svg' | 'auto';
 		autoThreshold?: number;
 		resolution?: number;
@@ -96,6 +97,7 @@
 		strength = 5,
 		returnSpeed = 0.08,
 		damping = 0.8,
+		dotScale = 0.41,
 		renderMode = 'auto',
 		autoThreshold = 200,
 		resolution = 1,
@@ -162,7 +164,7 @@
 		const offsetX = (W - gridW) / 2;
 		const offsetY = (H - gridH) / 2;
 		const subCellSize = cellSize / res;
-		const radius = subCellSize * 0.41;
+		const radius = subCellSize * dotScale;
 
 		const pArray = new Float32Array(circleCount * STRIDE);
 
