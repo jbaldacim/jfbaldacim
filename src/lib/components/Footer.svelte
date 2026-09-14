@@ -52,7 +52,7 @@
 	</svg>
 {/snippet}
 
-<footer class="w-full border-t bg-card text-muted-foreground transition-colors duration-300">
+<footer class="z-10 w-full border-t bg-card text-muted-foreground transition-colors duration-300">
 	<div
 		class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-8 md:flex-row"
 	>
