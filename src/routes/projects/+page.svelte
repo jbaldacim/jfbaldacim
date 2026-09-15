@@ -30,7 +30,9 @@
 	<meta name="description" content="João Baldacim's website" />
 </svelte:head>
 
-<main class="mx-auto flex w-full max-w-350 flex-1 flex-col overflow-x-clip p-4 md:p-6">
+<main
+	class="mx-auto flex w-full max-w-350 flex-1 flex-col overflow-x-clip p-4 pt-20! md:p-6 md:pt-22!"
+>
 	<h1 class="font-heading text-3xl font-semibold">Projects</h1>
 
 	<ProjectList {projects} bind:activeProject />
