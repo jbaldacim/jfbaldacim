@@ -14,8 +14,8 @@
 	const coords = new Spring(
 		{ x: 0, y: 0 },
 		{
-			stiffness: 0.12,
-			damping: 0.6
+			stiffness: 0.19,
+			damping: 0.33
 		}
 	);
 </script>

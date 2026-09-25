@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { availableIcons } from '$lib/icons';
 	import type { Project } from '$lib/projects';
-	import RepulsionGrid from './RepulsionGrid.svelte';
+	// import { availableIcons } from '$lib/icons';
+	// import RepulsionGrid from './RepulsionGrid.svelte';
 
 	interface Props {
 		project: Project;
@@ -13,8 +13,8 @@
 
 	let { project, active = false, onmouseenter, onmouseleave }: Props = $props();
 
-	const iconSize = 48;
-	const dotScale = 0.205;
+	// const iconSize = 48;
+	// const dotScale = 0.205;
 </script>
 
 <a
@@ -29,7 +29,9 @@
 		{project.title}
 	</h2>
 	<p class="sr-only">{project.description}</p>
-	<div class="absolute bottom-6 left-6 grid grid-cols-3 gap-4">
+
+	<!-- Stack Icons -->
+	<!-- <div class="absolute bottom-6 left-6 grid grid-cols-3 gap-4">
 		{#each project.stack as tech (tech)}
 			{@const icon = availableIcons[tech.toLowerCase()]}
 			{#if icon}
@@ -45,5 +47,5 @@
 				/>
 			{/if}
 		{/each}
-	</div>
+	</div> -->
 </a>
