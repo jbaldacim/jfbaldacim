@@ -20,14 +20,7 @@
 	);
 </script>
 
-<svelte:window
-	onmousemove={(event) => {
-		coords.set({
-			x: event.clientX,
-			y: event.clientY
-		});
-	}}
-/>
+<svelte:window />
 
 <!--
     Could use
@@ -35,7 +28,16 @@
     with
     style={`--project-count: ${projects.length}`}
  -->
-<div class="grid flex-1 grid-rows-3 gap-4 py-6">
+<div
+	class="grid flex-1 grid-rows-3 gap-4 py-6"
+	onmousemove={(event) => {
+		coords.set({
+			x: event.clientX,
+			y: event.clientY
+		});
+	}}
+	role="presentation"
+>
 	{#each projects as project (project.id)}
 		<ProjectListItem
 			{project}
