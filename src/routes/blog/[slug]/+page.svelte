@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>{post.metadata.title} · João Baldacim</title>
+	<title>{post.metadata.title} • João Baldacim</title>
 </svelte:head>
 
 <main class="mx-auto w-full max-w-4xl flex-1 bg-background p-4 pt-20! md:p-6 md:pt-22!">
