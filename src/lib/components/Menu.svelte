@@ -1,3 +1,9 @@
+<!--
+    TODO - fix colors so burger animation shows
+    TODO - solve scrollbar interfering with width
+    TODO - fix transition on menu item hover
+    TODO - add more stuff to full screen menu
+-->
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { resolve } from '$app/paths';
@@ -8,11 +14,28 @@
 	let { duration = 700 }: { duration?: number } = $props();
 	let currentPage = $derived(page.url.pathname);
 	let isMenuOpen = $state(false);
+
 	const isActive = (path: Pathname) =>
 		path === '/' ? currentPage === '/' : currentPage.startsWith(path);
 
 	afterNavigate(() => {
 		isMenuOpen = false;
+	});
+
+	function handleKeyDown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && isMenuOpen) {
+			isMenuOpen = false;
+		}
+	}
+
+	// Lock body scroll when menu overlay is open
+	$effect(() => {
+		if (typeof document !== 'undefined') {
+			document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+		}
+		return () => {
+			if (typeof document !== 'undefined') document.body.style.overflow = '';
+		};
 	});
 
 	interface NavLink {
@@ -29,61 +52,65 @@
 	];
 </script>
 
-{#snippet navItem(link: NavLink, mobile = false)}
-	<a
-		href={resolve(link.path)}
-		aria-current={isActive(link.path) ? 'page' : undefined}
-		class={[
-			'flex items-center justify-center px-2',
-			mobile ? 'w-full py-2' : 'h-full border-y-2 border-card',
-			{
-				'border-b-primary text-primary': isActive(link.path),
-				'hover:border-b-primary/15 hover:text-primary': !isActive(link.path)
-			}
-		]}
-	>
-		{link.text}
-	</a>
-{/snippet}
+<svelte:window onkeydown={handleKeyDown} />
 
+<!-- Fixed Navigation Header -->
 <nav
-	class="fixed top-0 left-0 z-50 flex h-16 w-full flex-row items-center justify-between border-b bg-card px-6"
-	in:fade={{ duration: duration }}
+	class="fixed top-0 left-0 z-50 flex h-16 w-full flex-row items-center justify-between px-6"
+	in:fade={{ duration }}
 >
 	<span class="font-bold tracking-wide uppercase transition-colors duration-300 hover:text-primary">
 		<a href={resolve('/')}>João Baldacim</a>
 	</span>
-	<!-- Desktop menu -->
-	<div
-		class="hidden h-full grid-cols-5 items-center gap-4 tracking-wider transition-colors duration-300 md:grid"
-	>
-		{#each navLinks as navLink (navLink.text)}
-			{@render navItem(navLink)}
-		{/each}
-	</div>
-	<!-- Mobile menu -->
-	{#if isMenuOpen}
-		<div
-			id="mobile-menu"
-			class="absolute top-full left-0 flex w-full flex-col items-center justify-center gap-2 border-b bg-card py-2 tracking-wider md:hidden"
-		>
-			{#each navLinks as navLink (navLink.text)}
-				{@render navItem(navLink, true)}
-			{/each}
-		</div>
-	{/if}
+
+	<!-- Burger toggle button (All Screen Sizes) -->
 	<button
-		class="burger-icon md:hidden"
+		class="burger-icon"
 		class:open={isMenuOpen}
 		onclick={() => (isMenuOpen = !isMenuOpen)}
 		aria-label="Toggle menu"
 		aria-expanded={isMenuOpen}
-		aria-controls="mobile-menu"
+		aria-controls="fullscreen-menu"
 	>
 		<span></span><span></span><span></span>
 		<span></span><span></span><span></span>
 	</button>
 </nav>
+
+<!-- Fullscreen Circular Clip-Path Overlay (All Screen Sizes) -->
+<div
+	id="fullscreen-menu"
+	class="fixed inset-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden bg-primary transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]"
+	style="clip-path: circle({isMenuOpen ? '150%' : '0%'} at calc(100% - 1.5rem - 14px) 2rem);"
+	inert={!isMenuOpen}
+>
+	<ul class="flex flex-col items-center gap-4 text-center md:gap-8">
+		{#each navLinks as navLink, index (navLink.text)}
+			<li>
+				<a
+					href={resolve(navLink.path)}
+					aria-current={isActive(navLink.path) ? 'page' : undefined}
+					class={[
+						'inline-block text-4xl font-bold tracking-tight transition-all sm:text-6xl md:text-7xl',
+						isActive(navLink.path) ? 'text-background' : 'hover:text-background/80'
+					]}
+					style="
+						opacity: {isMenuOpen ? 1 : 0};
+						transform: translateX({isMenuOpen ? '0px' : '100%'});
+						transition-timing-function: {isMenuOpen
+						? 'cubic-bezier(0.16, 1, 0.3, 1)'
+						: 'cubic-bezier(0.7, 0, 0.84, 0)'};
+						transition-delay: {isMenuOpen
+						? `${250 + index * 60}ms`
+						: `${(navLinks.length - 1 - index) * 30}ms`};
+					"
+				>
+					{navLink.text}
+				</a>
+			</li>
+		{/each}
+	</ul>
+</div>
 
 <style>
 	.burger-icon {
@@ -94,6 +121,7 @@
 		border: none;
 		padding: 0;
 		transition: 0.5s ease-in-out;
+		cursor: pointer;
 	}
 	.burger-icon span {
 		display: block;
@@ -101,8 +129,11 @@
 		height: 4px;
 		width: 50%;
 		background: var(--color-foreground);
-		transition: 0.25s ease-in-out;
+		transition:
+			0.25s ease-in-out,
+			background 0;
 	}
+
 	.burger-icon span:nth-child(odd) {
 		left: 0;
 		border-radius: 4px 0 0 4px;
