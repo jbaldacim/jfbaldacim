@@ -89,10 +89,7 @@
 
 html {
 	scroll-padding-top: 64px; /* height of sticky header */
-}
-
-body {
-	scrollbar-gutter: stable both-edges;
+	overflow-y: scroll;
 }
 
 code,

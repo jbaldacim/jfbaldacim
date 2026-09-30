@@ -1,9 +1,9 @@
-<!--
-    TODO - fix colors so burger animation shows
-    TODO - solve scrollbar interfering with width
-    TODO - fix transition on menu item hover
+<!-- 
     TODO - add more stuff to full screen menu
+    TODO - fix scroll locking on open menu
+    TODO - check tab locking on open menu
 -->
+
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { resolve } from '$app/paths';
@@ -14,6 +14,7 @@
 	let { duration = 700 }: { duration?: number } = $props();
 	let currentPage = $derived(page.url.pathname);
 	let isMenuOpen = $state(false);
+	let clickedIndex = $state<number | null>(null);
 
 	const isActive = (path: Pathname) =>
 		path === '/' ? currentPage === '/' : currentPage.startsWith(path);
@@ -24,8 +25,36 @@
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Escape' && isMenuOpen) {
+			clickedIndex = null;
 			isMenuOpen = false;
 		}
+	}
+
+	function toggleMenu() {
+		if (!isMenuOpen) {
+			clickedIndex = null; // Reset clicked index when reopening
+		}
+		isMenuOpen = !isMenuOpen;
+	}
+
+	function handleLinkClick(index: number) {
+		clickedIndex = index;
+		isMenuOpen = false;
+	}
+
+	function getExitDelay(index: number, total: number): number {
+		if (clickedIndex !== null) {
+			const distance = Math.abs(index - clickedIndex);
+			return distance * 40;
+		}
+		return (total - 1 - index) * 30;
+	}
+
+	function getExitDuration(index: number): number {
+		if (clickedIndex !== null && index === clickedIndex) {
+			return 180;
+		}
+		return 260;
 	}
 
 	// Lock body scroll when menu overlay is open
@@ -63,11 +92,11 @@
 		<a href={resolve('/')}>João Baldacim</a>
 	</span>
 
-	<!-- Burger toggle button (All Screen Sizes) -->
+	<!-- Burger toggle button -->
 	<button
 		class="burger-icon"
 		class:open={isMenuOpen}
-		onclick={() => (isMenuOpen = !isMenuOpen)}
+		onclick={toggleMenu}
 		aria-label="Toggle menu"
 		aria-expanded={isMenuOpen}
 		aria-controls="fullscreen-menu"
@@ -77,32 +106,38 @@
 	</button>
 </nav>
 
-<!-- Fullscreen Circular Clip-Path Overlay (All Screen Sizes) -->
+<!-- Fullscreen Circular Clip-Path Overlay -->
 <div
 	id="fullscreen-menu"
-	class="fixed inset-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden bg-primary transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]"
+	class="fixed inset-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden bg-card transition-[clip-path] duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]"
 	style="clip-path: circle({isMenuOpen ? '150%' : '0%'} at calc(100% - 1.5rem - 14px) 2rem);"
 	inert={!isMenuOpen}
 >
 	<ul class="flex flex-col items-center gap-4 text-center md:gap-8">
 		{#each navLinks as navLink, index (navLink.text)}
+			{@const enterDelay = `${250 + index * 60}ms`}
+			{@const exitDelay = `${getExitDelay(index, navLinks.length)}ms`}
+			{@const animDuration = isMenuOpen ? '400ms' : `${getExitDuration(index)}ms`}
+			{@const animTiming = isMenuOpen
+				? 'linear(0, 0.236 4.2%, 0.447 8.5%, 0.633 12.9%, 0.793 17.4%, 0.863 19.7%, 0.927 22%, 0.986 24.4%, 1.039 26.8%, 1.084 29.2%, 1.125 31.7%, 1.159 34.2%, 1.189 36.8%, 1.208 39%, 1.224 41.2%, 1.236 43.4%, 1.244 45.7%, 1.249 48.1%, 1.25 50.5%, 1.247 53%, 1.241 55.6%, 1.224 60.1%, 1.195 65.1%, 1.163 69.9%, 1.075 81.8%, 1.053 85.1%, 1.036 88.1%, 1.02 91.4%, 1.009 94.4%, 1.002 97.3%, 1)'
+				: 'cubic-bezier(0.7, 0, 0.84, 0)'}
+
 			<li>
 				<a
 					href={resolve(navLink.path)}
+					onclick={() => handleLinkClick(index)}
 					aria-current={isActive(navLink.path) ? 'page' : undefined}
 					class={[
-						'inline-block text-4xl font-bold tracking-tight transition-all sm:text-6xl md:text-7xl',
-						isActive(navLink.path) ? 'text-background' : 'hover:text-background/80'
+						'inline-block text-4xl font-bold tracking-tight hover:tracking-widest sm:text-6xl md:text-7xl',
+						isActive(navLink.path) ? 'text-primary' : ''
 					]}
 					style="
 						opacity: {isMenuOpen ? 1 : 0};
 						transform: translateX({isMenuOpen ? '0px' : '100%'});
-						transition-timing-function: {isMenuOpen
-						? 'cubic-bezier(0.16, 1, 0.3, 1)'
-						: 'cubic-bezier(0.7, 0, 0.84, 0)'};
-						transition-delay: {isMenuOpen
-						? `${250 + index * 60}ms`
-						: `${(navLinks.length - 1 - index) * 30}ms`};
+						transition: 
+							transform {animDuration} {animTiming} {isMenuOpen ? enterDelay : exitDelay},
+							opacity {animDuration} {animTiming} {isMenuOpen ? enterDelay : exitDelay},
+							letter-spacing 300ms ease 0ms;
 					"
 				>
 					{navLink.text}
@@ -130,8 +165,14 @@
 		width: 50%;
 		background: var(--color-foreground);
 		transition:
-			0.25s ease-in-out,
-			background 0;
+			transform 0.25s ease-in-out,
+			top 0.25s ease-in-out,
+			left 0.25s ease-in-out,
+			opacity 0.25s ease-in-out;
+	}
+
+	.burger-icon:hover span {
+		background: var(--color-primary);
 	}
 
 	.burger-icon span:nth-child(odd) {
